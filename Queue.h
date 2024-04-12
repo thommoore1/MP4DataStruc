@@ -1,5 +1,5 @@
-#ifndef GENQUEUE_H
-#define GENQUEUE_H
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #include <iostream>
 #include <exception>
@@ -8,10 +8,10 @@
 using namespace std;
 
 template <typename T>
-class GenQueue{
+class Queue{
     public:
-        GenQueue();
-        ~GenQueue();
+        Queue();
+        ~Queue();
         void insert(T d); //enqueue
         T remove(); //dequeue
 
@@ -20,26 +20,26 @@ class GenQueue{
         bool isEmpty();
         unsigned int getSize();
     private:
-        LinkedList *myQueue;
+        LinkedList<T> *myQueue;
 };
 
 template <typename T>
-GenQueue<T>::GenQueue(){
+Queue<T>::Queue(){
     myQueue = new LinkedList<T>();
 }
 
 template <typename T>
-GenQueue<T>::~GenQueue(){
+Queue<T>::~Queue(){
     delete myQueue;
 }
 
 template <typename T>
-void GenQueue<T>::insert(T d){
+void Queue<T>::insert(T d){
     myQueue->insertBack(d);
 }
 
 template <typename T>
-T GenQueue<T>::remove(){
+T Queue<T>::remove(){
     if(isEmpty()){
         throw runtime_error("queue is empty, nothing to remove");
     }
@@ -47,17 +47,17 @@ T GenQueue<T>::remove(){
 }
 
 template <typename T>
-T GenQueue<T>::peek(){
+T Queue<T>::peek(){
     return myQueue->getFront();
 }
 
 template <typename T>
-bool GenQueue<T>::isEmpty(){
+bool Queue<T>::isEmpty(){
     return myQueue->isEmpty();
 }
 
 template <typename T>
-unsigned int GenQueue<T>::getSize(){
+unsigned int Queue<T>::getSize(){
     return myQueue->getSize();
 }
 

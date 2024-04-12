@@ -1,7 +1,7 @@
 #include "Office.h"
 
 Office::Office(char name, int numWindows) {
-    queue = new Queue<Student>;
+    queue = new Queue<Customer>;
     windows = new Window[numWindows];
     // create new windows for length of windows
     for (int i = 0; i < numWindows; ++i) {
@@ -124,14 +124,43 @@ void Office::prepStudentForQueue(Student s){
     ++queuePrepIndex;
 }
 
-void Office::makeQueuePrepArray(int sn){
+void Office::makeQueuePrepArray(int sn, Student s){
     queuePrep = new int[sn];
     queuePrepIndex = 0;
-    ++studentsToMove;
 }
 
+
+
 void Office::addQueueFromOtherOffice(){
-    
+    for(int i = 0; i < queuePrepIndex; ++i){
+        if(queuePrep == NULL){
+            break;
+        }
+        if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
+            addStudentToQueue(queuePrep[i]);
+        }
+    }
+    for(int i = 0; i < queuePrepIndex; ++i){
+        if(queuePrep == NULL){
+            break;
+        }
+        if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
+            addStudentToQueue(queuePrep[i]);
+        }
+    }
+    for(int i = 0; i < queuePrepIndex; ++i){
+        if(queuePrep == NULL){
+            break;
+        }
+        if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
+            addStudentToQueue(queuePrep[i]);
+        }
+    }
 
-
+    for(int i = 0; i < queuPrepIndex; ++i){
+        if(queuePrep[i] == NULL){
+            break;
+        }
+        queuePrep[i] == NULL;
+    }
 }

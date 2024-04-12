@@ -2,7 +2,7 @@
 #define OFFICE_H
 
 #include "Window.h"
-#include "Student.h"
+#include "Customer.h"
 
 #include <iostream>
 using namespace std;
@@ -15,8 +15,8 @@ class Office {
 
         void timeIncrement();
 
-        void addStudentToQueue(Student s);
-        void prepStudentForQueue(Student s); //TODO: This method is for adding students to queue who are coming from another office. Just adds them to an array that will be used by addQueueFromOtherOffice()
+        void addStudentToQueue(Customer s);
+        void prepStudentForQueue(Customer s); //TODO: This method is for adding students to queue who are coming from another office. Just adds them to an array that will be used by addQueueFromOtherOffice()
         void addQueueFromOtherOffice(); //TODO: This method should add students to queue depending on which office they are coming from
         void makeQueuePrepArray(int sn);
 
@@ -36,14 +36,14 @@ class Office {
 
     private:
 
-        Student* queuePrep; //TODO: constructor
+        Customer* queuePrep; //TODO: constructor
         int stuNum;
         int queuePrepIndex;
         int studentsToMove;
 
         int timeCounter; 
 
-        Queue<Student> *queue;
+        Queue<Customer> *queue;
         Window* windows;
         char officeName;
         int numWindows;
