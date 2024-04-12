@@ -127,8 +127,11 @@ void Office::prepStudentForQueue(Student s){
 void Office::makeQueuePrepArray(int sn){
     queuePrep = new int[sn];
     queuePrepIndex = 0;
+    ++studentsToMove;
 }
 
 void Office::addQueueFromOtherOffice(){
     
+
+
 }

@@ -39,6 +39,7 @@ class Office {
         Student* queuePrep; //TODO: constructor
         int stuNum;
         int queuePrepIndex;
+        int studentsToMove;
 
         int timeCounter; 
 
