@@ -44,7 +44,7 @@ class Office {
 
         int timeCounter; 
 
-        Queue<Customer> *queue;
+        Queue<Customer*> *queue; //TODO: I think this needs to be Queue<Customer*>
         Window** windows;
         char officeName;
         int numWindows;

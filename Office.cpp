@@ -1,7 +1,7 @@
 #include "Office.h"
 
 Office::Office(char name, int numWindows) {
-    queue = new Queue<Customer>;
+    queue = new Queue<Customer*>();
     windows = new Window*[numWindows];
     // create new windows for length of windows
     for (int i = 0; i < numWindows; ++i) {
@@ -9,7 +9,7 @@ Office::Office(char name, int numWindows) {
         windows[i] = w;
     }
     officeName = name;
-    this.numWindows = numWindows
+    this->numWindows = numWindows;
 
     // set all aux variables to 0
     totalWaitTime = 0;
@@ -37,7 +37,7 @@ void Office::timeIncrement() {
 
 }
 
-void Office::addStudentToQueue(Customer c) {
+void Office::addStudentToQueue(Customer* s) {
     queue->insert(s);
 }
 
@@ -125,19 +125,17 @@ void Office::prepStudentForQueue(Customer *c){
 }
 
 void Office::makeQueuePrepArray(int sn){
-    queuePrep = new int[sn];
+    queuePrep = new Customer*[sn];
     queuePrepIndex = 0;
 }
-
-
-//TODO: Get next office for customer 
+ 
 void Office::addQueueFromOtherOffice(){
     for(int i = 0; i < queuePrepIndex; ++i){
         if(queuePrep == NULL){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
-            addStudentToQueue(*queuePrep[i]);
+            addStudentToQueue(queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
@@ -145,7 +143,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
-            addStudentToQueue(*queuePrep[i]);
+            addStudentToQueue(queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
@@ -153,7 +151,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
-            addStudentToQueue(*queuePrep[i]);
+            addStudentToQueue(queuePrep[i]);
         }
     }
 
