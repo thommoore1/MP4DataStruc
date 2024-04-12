@@ -17,7 +17,7 @@ class Office {
         void timeIncrement();
 
         void addStudentToQueue(Customer s);
-        void prepStudentForQueue(Customer s); //TODO: This method is for adding students to queue who are coming from another office. Just adds them to an array that will be used by addQueueFromOtherOffice()
+        void prepStudentForQueue(Customer *s); //TODO: This method is for adding students to queue who are coming from another office. Just adds them to an array that will be used by addQueueFromOtherOffice()
         void addQueueFromOtherOffice(); //TODO: This method should add students to queue depending on which office they are coming from
         void makeQueuePrepArray(int sn);
 
@@ -37,7 +37,7 @@ class Office {
 
     private:
 
-        Customer* queuePrep; //TODO: constructor
+        Customer** queuePrep; //TODO: constructor
         int stuNum;
         int queuePrepIndex;
         int studentsToMove;

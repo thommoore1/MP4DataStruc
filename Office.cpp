@@ -37,7 +37,7 @@ void Office::timeIncrement() {
 
 }
 
-void Office::addStudentToQueue(Student s) {
+void Office::addStudentToQueue(Customer c) {
     queue->insert(s);
 }
 
@@ -69,7 +69,7 @@ int Office::getMeanIdleTime() {
     int totalIdleTime = 0;
     for (int i = 0; i < numWindows; ++i) {
         // add idle time of window to total
-        totalidleTime += windows[i]->getIdleTime();
+        totalIdleTime += windows[i]->getTotalIdleTime();
     }
     return (totalIdleTime / numWindows);
 }
@@ -119,7 +119,7 @@ void Office::addToWaitTime() {
     totalWaitTime += queue->getSize();
 }
 
-void Office::prepStudentForQueue(Customer c){
+void Office::prepStudentForQueue(Customer *c){
     queuePrep[queuePrepIndex] = c;
     ++queuePrepIndex;
 }
@@ -137,7 +137,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
-            addStudentToQueue(queuePrep[i]);
+            addStudentToQueue(*queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
@@ -145,7 +145,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
-            addStudentToQueue(queuePrep[i]);
+            addStudentToQueue(*queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
@@ -153,7 +153,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
-            addStudentToQueue(queuePrep[i]);
+            addStudentToQueue(*queuePrep[i]);
         }
     }
 
