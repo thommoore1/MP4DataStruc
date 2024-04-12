@@ -14,6 +14,7 @@ class Customer{
         char getNextOffice();
         bool needsNewQueue();
         bool notDone();
+        void setCurrentQueue(char newQueue);
 
     private:
         int officeNum;

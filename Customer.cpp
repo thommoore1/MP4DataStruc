@@ -33,3 +33,7 @@ bool Customer::needsNewQueue(){
 bool Customer::notDone(){
     return (officeNum == 4);
 }
+
+void Customer::setCurrentQueue(char newQueue){
+    currentQueue = newQueue;
+}
