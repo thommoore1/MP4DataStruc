@@ -27,7 +27,22 @@ ServiceCenter::ServiceCenter(string fileName){
             }
             else{
                 if(line.size() > 1){//check if it is player data
-                    Customer* stu = new Customer(stoi(line[0]), stoi(line[2]), stoi(line[4]), line[6], line[8], line[10]);
+                    string lineData = line;
+
+                    int time1 = stoi(lineData.substr(0, lineData.find(' ')));
+                    lineData = line.substr(lineData.find(' ') + 1, lineData.size());
+
+                    int time2 = stoi(lineData.substr(0, lineData.find(' ')));
+                    lineData = line.substr(lineData.find(' ') + 1, lineData.size());
+
+                    int time3 = stoi(lineData.substr(0, lineData.find(' ')));
+                    lineData = line.substr(lineData.find(' ') + 1, lineData.size());
+
+                    char office1 = lineData[0];
+                    char office2 = lineData[2];
+                    char office3 = lineData[4];
+
+                    Customer* stu = new Customer(time1, time2, time3, office1, office2, office3);
                     studentQueue->add(stu);
                 }
                 else if(timeOrStudentNum == 't'){//check if is time variable
