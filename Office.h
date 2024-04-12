@@ -3,6 +3,7 @@
 
 #include "Window.h"
 #include "Customer.h"
+#include "Queue.h"
 
 #include <iostream>
 using namespace std;
@@ -36,15 +37,15 @@ class Office {
 
     private:
 
-        Customer* queuePrep; //TODO: constructor
+        Customer** queuePrep; //TODO: constructor
         int stuNum;
         int queuePrepIndex;
         int studentsToMove;
 
         int timeCounter; 
 
-        Queue<Customer> *queue; //TODO: I think this should be <Customer*>
-        Window* windows;
+        Queue<Customer> *queue;
+        Window** windows;
         char officeName;
         int numWindows;
         int* prepQueue();

@@ -2,7 +2,7 @@
 
 Office::Office(char name, int numWindows) {
     queue = new Queue<Customer>;
-    windows = new Window[numWindows];
+    windows = new Window*[numWindows];
     // create new windows for length of windows
     for (int i = 0; i < numWindows; ++i) {
         Window *w = new Window();
@@ -37,7 +37,7 @@ void Office::timeIncrement() {
 
 }
 
-void Office::addStudentToQueue(Student* s) {
+void Office::addStudentToQueue(Customer c) {
     queue->insert(s);
 }
 
@@ -69,12 +69,12 @@ int Office::getMeanIdleTime() {
     int totalIdleTime = 0;
     for (int i = 0; i < numWindows; ++i) {
         // add idle time of window to total
-        totalidleTime += windows[i]->getIdleTime();
+        totalIdleTime += windows[i]->getTotalIdleTime();
     }
     return (totalIdleTime / numWindows);
 }
 
-int Office::getLongestIdleTime() {-
+int Office::getLongestIdleTime() {
     int maxIdleTime = 0;
     for (int i = 0; i < numWindows; ++i) {
         // if the max idle time is greater, replace the old one
@@ -119,8 +119,8 @@ void Office::addToWaitTime() {
     totalWaitTime += queue->getSize();
 }
 
-void Office::prepStudentForQueue(Student* s){
-    queuePrep[queuePrepIndex] = s;
+void Office::prepStudentForQueue(Customer *c){
+    queuePrep[queuePrepIndex] = c;
     ++queuePrepIndex;
 }
 
@@ -130,14 +130,14 @@ void Office::makeQueuePrepArray(int sn){
 }
 
 
-
+//TODO: Get next office for customer 
 void Office::addQueueFromOtherOffice(){
     for(int i = 0; i < queuePrepIndex; ++i){
         if(queuePrep == NULL){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
-            addStudentToQueue(queuePrep[i]);
+            addStudentToQueue(*queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
@@ -145,7 +145,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
-            addStudentToQueue(queuePrep[i]);
+            addStudentToQueue(*queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
@@ -153,11 +153,11 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
-            addStudentToQueue(queuePrep[i]);
+            addStudentToQueue(*queuePrep[i]);
         }
     }
 
-    for(int i = 0; i < queuPrepIndex; ++i){
+    for(int i = 0; i < queuePrepIndex; ++i){
         if(queuePrep[i] == NULL){
             break;
         }
