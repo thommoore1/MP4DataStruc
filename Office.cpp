@@ -130,7 +130,7 @@ void Office::makeQueuePrepArray(int sn){
 }
 
 
-
+//TODO: Get next office for customer 
 void Office::addQueueFromOtherOffice(){
     for(int i = 0; i < queuePrepIndex; ++i){
         if(queuePrep == NULL){
@@ -157,7 +157,7 @@ void Office::addQueueFromOtherOffice(){
         }
     }
 
-    for(int i = 0; i < queuPrepIndex; ++i){
+    for(int i = 0; i < queuePrepIndex; ++i){
         if(queuePrep[i] == NULL){
             break;
         }
