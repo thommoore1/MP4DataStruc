@@ -4,18 +4,21 @@
 #include <iostream>
 #include <exception>
 #include <fstream>
+#include "Queue.h"
+#include "Student.h"
 
 using namespace std;
 
 class ServiceCenter{
     public:
         ServiceCenter(string fileName);
+        ~ServiceCenter();
 
     private:
         unsigned int time;
-        registrar* registrarSim;
-        cashier* cashierSim;
-        finAid* finAidSim;
+        Office* registrarSim;
+        Office* cashierSim;
+        Office* finAidSim;
 };
 
 
