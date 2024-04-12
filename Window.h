@@ -15,14 +15,20 @@ class Window {
 
         bool isEmpty();
         void approachWindow(Customer c);
-        Customer *currentCustomer;
+        bool isCustomerDone();
+
+        // private var accessors
+        int getLongestIdleTime();
+        int getNumIdlesOver5();
+        int getTotalIdleTime();
 
     private:
         // time tracking variables
-        int longestIdletime;
-        int idleOver5;
-        int totalIdle;
-
+        int longestIdleTime;
+        int idlesOver5;
+        int currentIdle;
+        int totalIdleTime;
+        Customer* currentCustomer;
 
 };
 

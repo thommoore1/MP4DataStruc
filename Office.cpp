@@ -74,7 +74,7 @@ int Office::getMeanIdleTime() {
     return (totalIdleTime / numWindows);
 }
 
-int Office::getLongestIdleTime() {-
+int Office::getLongestIdleTime() {
     int maxIdleTime = 0;
     for (int i = 0; i < numWindows; ++i) {
         // if the max idle time is greater, replace the old one
@@ -119,12 +119,12 @@ void Office::addToWaitTime() {
     totalWaitTime += queue->getSize();
 }
 
-void Office::prepStudentForQueue(Student s){
-    queuePrep[queuePrepIndex] = s;
+void Office::prepStudentForQueue(Customer c){
+    queuePrep[queuePrepIndex] = c;
     ++queuePrepIndex;
 }
 
-void Office::makeQueuePrepArray(int sn, Student s){
+void Office::makeQueuePrepArray(int sn){
     queuePrep = new int[sn];
     queuePrepIndex = 0;
 }
