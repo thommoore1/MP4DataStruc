@@ -1,7 +1,7 @@
 #include "Office.h"
 
 Office::Office(char name, int numWindows) {
-    queue = new Queue<Student>;
+    queue = new Queue<Customer>;
     windows = new Window[numWindows];
     // create new windows for length of windows
     for (int i = 0; i < numWindows; ++i) {

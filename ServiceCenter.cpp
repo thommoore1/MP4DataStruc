@@ -5,11 +5,11 @@ ServiceCenter::ServiceCenter(string fileName){
     int count = -1;
     int count2 = -1;
     ifstream readFile(fileName);
-    char timeOrStudentNum = 't';
+    timeOrStudentNum = 't';
 
-    Queue<int>* numOfStudentsQueue = new Queue<int>();
-    Queue<int>* joinTimeQueue = new Queue<int>(); // This is a queue for times when students join. NOT joining a Timequeue.   Queue<int>* studentNum = new Queue<int>();
-    Queue<Student>* playerQueue = new Queue<Student>();
+    numOfStudentsQueue = new Queue<int>();
+    joinTimeQueue = new Queue<int>(); // This is a queue for times when students join. NOT joining a Timequeue.   Queue<int>* studentNum = new Queue<int>();
+    studentQueue = new Queue<Customer>();
     
     int studentCount = 0;
 
@@ -17,17 +17,17 @@ ServiceCenter::ServiceCenter(string fileName){
         while(getline(readFile,line)){
             ++count;
             if(count == 0){
-                registrar = new Office(stoi(line)); //TODO: need to import something???
+                registrar = new Office('R', stoi(line)); //TODO: need to import something???
             }
             else if(count == 1){
-                cashier = new Office(stoi(line));
+                cashier = new Office('C', stoi(line));
             }
             else if(count == 2){
-                finAid = new Office(stoi(line));
+                finAid = new Office('F', stoi(line));
             }
             else{
                 if(line.size() > 1){//check if it is player data
-                    Student* stu = new Student(stoi(line[0]), stoi(line[2]), stoi(line[4]), line[6], line[8], line[10]);
+                    Customer* stu = new Customer(stoi(line[0]), stoi(line[2]), stoi(line[4]), line[6], line[8], line[10]);
                     studentQueue->add(stu);
                 }
                 else if(timeOrStudentNum == 't'){//check if is time variable
@@ -47,7 +47,7 @@ ServiceCenter::ServiceCenter(string fileName){
     finAid->makeQueuePrepArray(studentCount);
     cashier->makeQueuePrepArray(studentCount);
 
-    Student* stuArray = new Student[studentCount]; //adding student queue to student array
+    Customer* stuArray = new Customer[studentCount]; //adding student queue to student array
     int index = -1;
     while(!(stu->isEmpty())){
         stuArray[++index] = stuArray->pop();
