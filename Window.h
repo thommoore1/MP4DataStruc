@@ -11,9 +11,11 @@ class Window {
         Window();
         ~Window();
 
+        void timeIncrement();
+
         bool isEmpty();
-        void approachWindow(Student s);
-        Student* student;
+        void approachWindow(Customer c);
+        Customer *currentCustomer;
 
     private:
         // time tracking variables

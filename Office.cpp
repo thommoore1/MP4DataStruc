@@ -2,7 +2,7 @@
 
 Office::Office(char name, int numWindows) {
     queue = new Queue<Customer>;
-    windows = new Window[numWindows];
+    windows = new Window*[numWindows];
     // create new windows for length of windows
     for (int i = 0; i < numWindows; ++i) {
         Window *w = new Window();

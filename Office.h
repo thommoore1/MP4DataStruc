@@ -3,6 +3,7 @@
 
 #include "Window.h"
 #include "Customer.h"
+#include "Queue.h"
 
 #include <iostream>
 using namespace std;
@@ -44,7 +45,7 @@ class Office {
         int timeCounter; 
 
         Queue<Customer> *queue;
-        Window* windows;
+        Window** windows;
         char officeName;
         int numWindows;
         int* prepQueue();
