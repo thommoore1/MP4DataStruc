@@ -17,8 +17,8 @@ class Office {
         void timeIncrement();
 
         void addStudentToQueue(Customer* s);
-        void prepStudentForQueue(Customer* s); //TODO: This method is for adding students to queue who are coming from another office. Just adds them to an array that will be used by addQueueFromOtherOffice()
-        void addQueueFromOtherOffice(); //TODO: This method should add students to queue depending on which office they are coming from
+        void prepStudentForQueue(Customer* s);
+        void addQueueFromOtherOffice();
         void makeQueuePrepArray(int sn);
 
         // accessors for private vars
@@ -44,7 +44,7 @@ class Office {
 
         int timeCounter; 
 
-        Queue<Customer*> *queue; //TODO: I think this needs to be Queue<Customer*>
+        Queue<Customer*> *queue;
         Window** windows;
         char officeName;
         int numWindows;

@@ -110,7 +110,7 @@ int Office::firstEmptyWindow() {
 
 void Office::sendStudentToWindow(int windowNum) {
     // removes a student from the queue and sends them to the first available window
-    windows[i]->approachWindow(queue->remove());
+    windows[windowNum]->approachWindow(queue->remove());
 }
 
 void Office::addToWaitTime() {

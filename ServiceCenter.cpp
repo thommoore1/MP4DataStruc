@@ -17,7 +17,7 @@ ServiceCenter::ServiceCenter(string fileName){
         while(getline(readFile,line)){
             ++count;
             if(count == 0){
-                registrar = new Office('R', stoi(line)); //TODO: need to import something???
+                registrar = new Office('R', stoi(line));
             }
             else if(count == 1){
                 cashier = new Office('C', stoi(line));
@@ -69,6 +69,7 @@ ServiceCenter::ServiceCenter(string fileName){
     while(!(studentQueue->isEmpty())){
         stuArray[++index] = studentQueue->remove();
     }
+
     delete studentQueue;
     
     time = 1;
@@ -97,8 +98,8 @@ ServiceCenter::ServiceCenter(string fileName){
         cashier->timeIncrement();
 
         for(int i = 0; i < studentCount; ++i){ //moving students to new offices if done
-            if(stuArray[i]->needsNewQueue()){ //TODO: add this student method
-                if(stuArray[i]->getNextOffice() == 'F'){ //TODO: add this student method
+            if(stuArray[i]->needsNewQueue()){
+                if(stuArray[i]->getNextOffice() == 'F'){
                     finAid->prepStudentForQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
@@ -129,5 +130,13 @@ bool ServiceCenter::studentsNotDone(){
 }
 
 ServiceCenter::~ServiceCenter() {
-    //TODO: destruct necessary
+    delete numOfStudentsQueue;
+    delete joinTimeQueue;
+    for(int i = 0; i < studentCount; ++i){
+        delete stuArray[i];
+    }
+    delete[] stuArray;
+    delete registrar;
+    delete finAid;
+    delete cashier;
 }

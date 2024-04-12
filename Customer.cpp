@@ -18,8 +18,8 @@ Customer::Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char
 }
 
 Customer::~Customer(){
-    delete officeTimes;
-    delete officeOrder;
+    delete[] officeTimes;
+    delete[] officeOrder;
 }
 
 char Customer::getNextOffice(){
