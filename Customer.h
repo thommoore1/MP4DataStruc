@@ -10,6 +10,16 @@ class Customer{
         Customer();
         Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char officeA, char officeB, char officeC);
         ~Customer();
+
+        char getNextOffice();
+        bool needsNewQueue();
+        bool notDone();
+
+    private:
+        int officeNum;
+        int* officeTimes;
+        char* officeOrder;
+        char currentQueue;
 };
 
 #endif;

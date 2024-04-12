@@ -37,7 +37,7 @@ void Office::timeIncrement() {
 
 }
 
-void Office::addStudentToQueue(Student s) {
+void Office::addStudentToQueue(Student* s) {
     queue->insert(s);
 }
 
@@ -119,12 +119,12 @@ void Office::addToWaitTime() {
     totalWaitTime += queue->getSize();
 }
 
-void Office::prepStudentForQueue(Student s){
+void Office::prepStudentForQueue(Student* s){
     queuePrep[queuePrepIndex] = s;
     ++queuePrepIndex;
 }
 
-void Office::makeQueuePrepArray(int sn, Student s){
+void Office::makeQueuePrepArray(int sn){
     queuePrep = new int[sn];
     queuePrepIndex = 0;
 }

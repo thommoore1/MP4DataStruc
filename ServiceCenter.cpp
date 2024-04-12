@@ -9,9 +9,9 @@ ServiceCenter::ServiceCenter(string fileName){
 
     numOfStudentsQueue = new Queue<int>();
     joinTimeQueue = new Queue<int>(); // This is a queue for times when students join. NOT joining a Timequeue.   Queue<int>* studentNum = new Queue<int>();
-    studentQueue = new Queue<Customer>();
+    studentQueue = new Queue<Customer*>();
     
-    int studentCount = 0;
+    studentCount = 0;
 
     if(readFile.is_open()){
         while(getline(readFile,line)){
@@ -43,40 +43,42 @@ ServiceCenter::ServiceCenter(string fileName){
                     char office3 = lineData[4];
 
                     Customer* stu = new Customer(time1, time2, time3, office1, office2, office3);
-                    studentQueue->add(stu);
+                    studentQueue->insert(stu);
                 }
                 else if(timeOrStudentNum == 't'){//check if is time variable
-                    joinTimeQueue->add(stoi(line));
+                    joinTimeQueue->insert(stoi(line));
                     timeOrStudentNum = 's';
                 }
                 else if(timeOrStudentNum == 's'){//check if it is num of students variable
                     studentCount += stoi(line);
-                    numOfStudentsQueue->add(stoi(line));
+                    numOfStudentsQueue->insert(stoi(line));
                     timeOrStudentNum = 't';
                 }
             }
         }
     }
 
+
+
     registrar->makeQueuePrepArray(studentCount);
     finAid->makeQueuePrepArray(studentCount);
     cashier->makeQueuePrepArray(studentCount);
 
-    Customer* stuArray = new Customer[studentCount]; //adding student queue to student array
+    stuArray = new Customer*[studentCount]; //adding student queue to student array
     int index = -1;
-    while(!(stu->isEmpty())){
-        stuArray[++index] = stuArray->pop();
+    while(!(studentQueue->isEmpty())){
+        stuArray[++index] = studentQueue->remove();
     }
-    delete stu;
+    delete studentQueue;
     
     time = 1;
     int stuJoinIndex = 0;
 
     while(studentsNotDone()){
-        if(time == joinTimeQueue.peek()){//time is equal to next student join time
-            joinTimeQueue.push();
-            for(i = stuJoinIndex; i < (i + numOfStudentsQueue.pop()); ++i){
-                if(stuArray[i]->getNextOffice() == 'F'){ //TODO: add this student method
+        if(time == joinTimeQueue->peek()){//time is equal to next student join time
+            joinTimeQueue->remove();
+            for(int i = stuJoinIndex; i < (i + numOfStudentsQueue->remove()); ++i){
+                if(stuArray[i]->getNextOffice() == 'F'){
                     finAid->addStudentToQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
@@ -109,7 +111,7 @@ ServiceCenter::ServiceCenter(string fileName){
         }
 
         finAid->addQueueFromOtherOffice();
-        regisrar->addQueueFromOtherOffice();
+        registrar->addQueueFromOtherOffice();
         cashier->addQueueFromOtherOffice();
 
     }
@@ -118,7 +120,7 @@ ServiceCenter::ServiceCenter(string fileName){
 }
 
 bool ServiceCenter::studentsNotDone(){
-    for(int i = 0; i < studentCountl ++i){
+    for(int i = 0; i < studentCount; ++i){
         if(stuArray[i]->notDone()){
             return true;
         }

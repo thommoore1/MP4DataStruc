@@ -18,8 +18,9 @@ class ServiceCenter{
         ~ServiceCenter();
 
     private:
-        bool StudentsNotDone();
+        bool studentsNotDone();
         unsigned int time;
+        unsigned int studentCount;
         Office* registrarSim;
         Office* cashierSim;
         Office* finAidSim;
@@ -27,11 +28,12 @@ class ServiceCenter{
         char timeOrStudentNum;
         Queue<int>* numOfStudentsQueue;
         Queue<int>* joinTimeQueue;
-        Queue<Customer>* studentQueue;
+        Queue<Customer*>* studentQueue;
 
         Office* registrar;
         Office* cashier;
         Office* finAid;
+        Customer** stuArray;
 };
 
 
