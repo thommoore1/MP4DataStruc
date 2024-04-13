@@ -15,6 +15,7 @@ class Customer{
         bool needsNewQueue();
         bool notDone();
         void setCurrentQueue(char newQueue);
+        void timeIncrement();
 
     private:
         int officeNum;

@@ -27,7 +27,7 @@ char Customer::getNextOffice(){
 }
 
 bool Customer::needsNewQueue(){
-    return (currentQueue == 'n');
+    return (currentQueue == 'N');
 }
 
 bool Customer::notDone(){

@@ -14,7 +14,7 @@ class Window {
         void timeIncrement();
 
         bool isEmpty();
-        void approachWindow(Customer c);
+        void approachWindow(Customer* c);
         bool isCustomerDone();
 
         // private var accessors
