@@ -15,7 +15,9 @@ Window::~Window() {
 void Window::timeIncrement() {
     cout << "window time increment " << endl;
     // increment time of customer
-    currentCustomer->timeIncrement();
+    if(currentCustomer){
+        currentCustomer->timeIncrement();
+    }
     cout << "current customer worked" << endl;    
     if (currentCustomer) { // if there is a customer
         // check if done
@@ -37,6 +39,7 @@ void Window::timeIncrement() {
 }
 
 void Window::approachWindow(Customer* c) {
+    cout << "arrrr" << endl;
     currentIdle = 0;
     currentCustomer = c;
 }

@@ -24,6 +24,7 @@ ServiceCenter::ServiceCenter(string fileName){
             }
             else if(count == 2){
                 finAid = new Office('F', stoi(line));
+                //finAid->timeIncrement(); //TODO: DELETE
             }
             else{
                 if(line.size() > 1){//check if it is player data
@@ -68,7 +69,9 @@ ServiceCenter::ServiceCenter(string fileName){
         }
     }
 
-
+        
+    //finAid->timeIncrement(); //TODO: DELETE
+    cout << "AHH" << endl;
 
     registrar->makeQueuePrepArray(studentCount);
     finAid->makeQueuePrepArray(studentCount);
@@ -81,7 +84,11 @@ ServiceCenter::ServiceCenter(string fileName){
         stuArray[++index] = studentQueue->remove();
     }
 
+            
+    //finAid->timeIncrement(); //TODO: DELETE
     delete studentQueue;
+    cout << "Delete" << endl;
+    //finAid->timeIncrement(); //TODO: DELETE
 
     cout << "DYLAN DEV: " << endl;
     
@@ -91,9 +98,11 @@ ServiceCenter::ServiceCenter(string fileName){
     int newStudentMax = 0;
 
     cout << "oops" << endl;
+    //finAid->timeIncrement(); //TODO: DELETE
+
     while(studentsNotDone()){
         cout << "I love Rene German" << endl;
-        if(time == joinTimeQueue->peek()){//time is equal to next student join time
+        if(joinTimeQueue->isEmpty() && time == joinTimeQueue->peek()){//time is equal to next student join time
             cout << "AFDHFSDHDFSH" << endl;
             joinTimeQueue->remove();
             stuJoinIndex = newStudentMax;
@@ -142,9 +151,13 @@ ServiceCenter::ServiceCenter(string fileName){
             }
         }
 
+        cout << "We all vote" << endl;
+
         finAid->addQueueFromOtherOffice();
         registrar->addQueueFromOtherOffice();
         cashier->addQueueFromOtherOffice();
+
+        cout << "mario" << endl;
 
     }
 

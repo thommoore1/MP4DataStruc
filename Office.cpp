@@ -23,6 +23,9 @@ Office::Office(char name, int numWindows) {
 
 Office::~Office() {
     delete queue;
+    for(int i = 0; i < numWindows; ++i){
+        windows[i];
+    }
     delete[] windows;
 }
 
@@ -30,20 +33,22 @@ void Office::timeIncrement() {
     cout << "time increment" << endl;
     ++timeCounter;
     cout << numWindows << endl;
-    for(int i = 0; i < numWindows; ++i){
-        cout << i << endl;
-        windows[i]->timeIncrement();
-    }
 
     // check if any windows are open
     int openWindow = firstEmptyWindow();
-    while ((openWindow != -1) || (queue->isEmpty())) {
-        
+    while ((openWindow != -1) && (!(queue->isEmpty()))) {
+        cout << "SAMMY" << endl;
+        cout << "IS this guy empty???: " << queue->isEmpty() << endl;
         // send the student to an open window
         sendStudentToWindow(openWindow);
-
+        cout << "DEEP" << endl;
         // set to next variable
         openWindow = firstEmptyWindow();
+        cout << "TEEP" << endl;
+    }
+    for(int i = 0; i < numWindows; ++i){
+        cout << i << endl;
+        windows[i]->timeIncrement();
     }
     addToWaitTime();
 
@@ -134,11 +139,25 @@ int Office::firstEmptyWindow() {
 }
 
 void Office::sendStudentToWindow(int windowNum) {
+    cout << "Rylan" << endl;
     // removes a student from the queue and sends them to the first available window
+    cout << "this dude is null isnt he: " << queue->peek() << endl;
     if(queue->peek()->exitQueue(timeCounter) > longestWaitTime){
+        cout << "password" << endl;
         longestWaitTime = queue->peek()->exitQueue(timeCounter);
     }
+    cout << "here" << endl;
+    cout << windowNum << endl;
+    cout << windows[windowNum] << endl;
+    cout << queue->peek() << endl;
+    //queue->remove();
+    Customer* testStu = new Customer(1, 1, 1, 'N', 'N', 'M');
+    windows[windowNum]->approachWindow(testStu);
+    delete testStu;
+    cout << "that worked bro" << endl;
+
     windows[windowNum]->approachWindow(queue->remove());
+    cout << "there" << endl;
 }
 
 void Office::addToWaitTime() {
@@ -159,7 +178,7 @@ void Office::makeQueuePrepArray(int sn){
  
 void Office::addQueueFromOtherOffice(){
     for(int i = 0; i < queuePrepIndex; ++i){
-        if(queuePrep == NULL){
+        if(queuePrep[i] == NULL){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
@@ -167,7 +186,7 @@ void Office::addQueueFromOtherOffice(){
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
-        if(queuePrep == NULL){
+        if(queuePrep[i] == NULL){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
@@ -175,7 +194,7 @@ void Office::addQueueFromOtherOffice(){
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
-        if(queuePrep == NULL){
+        if(queuePrep[i] == NULL){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
