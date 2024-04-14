@@ -19,6 +19,7 @@ class ServiceCenter{
 
     private:
         bool studentsNotDone();
+        void printFinalData();
         unsigned int time;
         unsigned int studentCount;
         Office* registrarSim;

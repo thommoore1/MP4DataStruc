@@ -4,9 +4,11 @@ Office::Office(char name, int numWindows) {
     queue = new Queue<Customer*>();
     windows = new Window*[numWindows];
     // create new windows for length of windows
+    cout << "NUM FREAKING WINDOWS" << numWindows << endl;
     for (int i = 0; i < numWindows; ++i) {
         Window *w = new Window();
         windows[i] = w;
+        cout << "WINDOWS TEST: " << windows[i]->isEmpty() << endl;
     }
     officeName = name;
     this->numWindows = numWindows;
@@ -25,8 +27,11 @@ Office::~Office() {
 }
 
 void Office::timeIncrement() {
+    cout << "time increment" << endl;
     ++timeCounter;
+    cout << numWindows << endl;
     for(int i = 0; i < numWindows; ++i){
+        cout << i << endl;
         windows[i]->timeIncrement();
     }
 
@@ -48,13 +53,15 @@ void Office::timeIncrement() {
             - sendStudentToWindow()
             - keep iterating until either -1 response or empty queue
     */
-
+   cout << "FINISHED OFFICE TIME INC" << endl;
 
 }
 
 void Office::addStudentToQueue(Customer* s) {
+    cout << "Student " << s <<  " added to queue" << endl;
     s->enterQueue(timeCounter); 
     queue->insert(s);
+    totalVisitors++;
 }
 
 int Office::getNumWindows() {
@@ -70,7 +77,9 @@ int Office::getTotalVisitors() {
 }
 
 double Office::getMeanWaitTime() {
-    return (totalWaitTime / totalVisitors);
+    totalWaitTime = 10;
+    totalVisitors = 10;
+    return ((double) totalWaitTime / (double) totalVisitors);
 }
 
 int Office::getLongestWaitTime() {
@@ -87,7 +96,7 @@ int Office::getMeanIdleTime() {
         // add idle time of window to total
         totalIdleTime += windows[i]->getTotalIdleTime();
     }
-    return (totalIdleTime / numWindows);
+    return ((double) totalIdleTime / (double) numWindows);
 }
 
 int Office::getLongestIdleTime() {
@@ -154,7 +163,6 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
-            queuePrep[i]->enterQueue(timeCounter);
             addStudentToQueue(queuePrep[i]);
         }
     }
@@ -163,7 +171,6 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
-            queuePrep[i]->enterQueue(timeCounter);
             addStudentToQueue(queuePrep[i]);
         }
     }
@@ -172,7 +179,6 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
-            queuePrep[i]->enterQueue(timeCounter);
             addStudentToQueue(queuePrep[i]);
         }
     }
