@@ -25,19 +25,35 @@ Office::~Office() {
 }
 
 void Office::timeIncrement() {
+    ++timeCounter;
+    for(int i = 0; i < numWindows; ++i){
+        windows[i]->timeIncrement();
+    }
+
+    // check if any windows are open
+    int openWindow = firstEmptyWindow();
+    while ((openWindow != -1) || (queue->isEmpty())) {
+        
+        // send the student to an open window
+        sendStudentToWindow(openWindow);
+
+        // set to next variable
+        openWindow = firstEmptyWindow();
+    }
+    addToWaitTime();
 
     /* TODO:
-        - Add students to queue
         - Increment time for windows
         - Check if any windows are open after using firstEmptyWindow()
             - sendStudentToWindow()
             - keep iterating until either -1 response or empty queue
-        - addToWaitTime()
     */
+
 
 }
 
 void Office::addStudentToQueue(Customer* s) {
+    s->enterQueue(timeCounter); 
     queue->insert(s);
 }
 
@@ -110,6 +126,9 @@ int Office::firstEmptyWindow() {
 
 void Office::sendStudentToWindow(int windowNum) {
     // removes a student from the queue and sends them to the first available window
+    if(queue->peek()->exitQueue(timeCounter) > longestWaitTime){
+        longestWaitTime = queue->peek()->exitQueue(timeCounter);
+    }
     windows[windowNum]->approachWindow(queue->remove());
 }
 
@@ -135,6 +154,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
+            queuePrep[i]->enterQueue(timeCounter);
             addStudentToQueue(queuePrep[i]);
         }
     }
@@ -143,6 +163,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
+            queuePrep[i]->enterQueue(timeCounter);
             addStudentToQueue(queuePrep[i]);
         }
     }
@@ -151,6 +172,7 @@ void Office::addQueueFromOtherOffice(){
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
+            queuePrep[i]->enterQueue(timeCounter);
             addStudentToQueue(queuePrep[i]);
         }
     }

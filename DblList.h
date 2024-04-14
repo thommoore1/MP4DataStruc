@@ -56,6 +56,11 @@ class DblList{
 };
 
 template <typename T>
+bool DblList<T>::isEmpty() {
+    return (size == 0);
+}
+
+template <typename T>
 DblList<T>::DblList(){
     front = NULL;
     back = NULL;
@@ -72,7 +77,7 @@ DblList<T>::~DblList(){
 template <typename T>
 T DblList<T>::getFront(){
     if(size == 0){
-        return nullptr;
+        throw runtime_error("list is empty");
     }
     return front->data;
 }
@@ -99,7 +104,7 @@ void DblList<T>::insertBack(T d){
     if(isEmpty()){
         front = node;
     }
-    else{
+    else {
         node->prev = back;
         back->next = node;
     }
@@ -186,7 +191,7 @@ T DblList<T>::removeNode(T value){
         curr = curr->next;
 
         if(curr == NULL){
-            return nullptr;
+            throw runtime_error("Value not found");
         }
     }
 

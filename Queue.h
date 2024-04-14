@@ -20,12 +20,12 @@ class Queue{
         bool isEmpty();
         unsigned int getSize();
     private:
-        LinkedList<T> *myQueue;
+        DblList<T> *myQueue;
 };
 
 template <typename T>
 Queue<T>::Queue(){
-    myQueue = new LinkedList<T>();
+    myQueue = new DblList<T>();
 }
 
 template <typename T>

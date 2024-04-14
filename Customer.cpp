@@ -5,6 +5,8 @@ Customer::Customer(){
 }
 
 Customer::Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char officeA, char officeB, char officeC){
+    timeWaited = 0;
+    initialQueueTime = 0;
     currentQueue = 'N';
     officeNum = 0;
     officeTimes = new int[3];
@@ -36,4 +38,21 @@ bool Customer::notDone(){
 
 void Customer::setCurrentQueue(char newQueue){
     currentQueue = newQueue;
+}
+
+void Customer::timeIncrement(){
+    ++timeWaited;
+    if(timeWaited == officeTimes[officeNum]){
+        ++officeNum;
+        timeWaited = 0;
+        currentQueue = 'N';
+    }
+}
+
+void Customer::enterQueue(int enterTime) {
+    initialQueueTime = enterTime;
+}
+
+int Customer::exitQueue(int exitTime) {
+    return (exitTime - initialQueueTime);
 }

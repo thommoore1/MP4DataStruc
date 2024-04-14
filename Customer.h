@@ -16,12 +16,16 @@ class Customer{
         bool notDone();
         void setCurrentQueue(char newQueue);
         void timeIncrement();
+        void enterQueue(int enterTime);
+        int exitQueue(int exitTime);
 
     private:
+        int timeWaited;
+        int initialQueueTime;
         int officeNum;
         int* officeTimes;
         char* officeOrder;
         char currentQueue;
 };
 
-#endif;
+#endif

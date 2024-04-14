@@ -15,7 +15,6 @@ class Window {
 
         bool isEmpty();
         void approachWindow(Customer* c);
-        bool isCustomerDone();
 
         // private var accessors
         int getLongestIdleTime();

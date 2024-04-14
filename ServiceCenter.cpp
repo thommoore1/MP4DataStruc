@@ -1,6 +1,8 @@
 #include "ServiceCenter.h"
 
 ServiceCenter::ServiceCenter(string fileName){
+    cout << "GAMER" << endl;
+
     string line;
     int count = -1;
     int count2 = -1;
@@ -13,8 +15,11 @@ ServiceCenter::ServiceCenter(string fileName){
     
     studentCount = 0;
 
+    cout << "Ashs" << endl;
+
     if(readFile.is_open()){
         while(getline(readFile,line)){
+            cout << "TOm" << endl;
             ++count;
             if(count == 0){
                 registrar = new Office('R', stoi(line));
@@ -27,16 +32,23 @@ ServiceCenter::ServiceCenter(string fileName){
             }
             else{
                 if(line.size() > 1){//check if it is player data
+                    cout << "yippie" << endl;
                     string lineData = line;
 
                     int time1 = stoi(lineData.substr(0, lineData.find(' ')));
                     lineData = line.substr(lineData.find(' ') + 1, lineData.size());
 
+                    cout << "YUH" << endl;
+
                     int time2 = stoi(lineData.substr(0, lineData.find(' ')));
                     lineData = line.substr(lineData.find(' ') + 1, lineData.size());
 
+                    cout << "YOUM" << endl;
+
                     int time3 = stoi(lineData.substr(0, lineData.find(' ')));
                     lineData = line.substr(lineData.find(' ') + 1, lineData.size());
+
+                    cout << "argh" << endl;
 
                     char office1 = lineData[0];
                     char office2 = lineData[2];

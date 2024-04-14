@@ -13,21 +13,39 @@ Window::~Window() {
 }
 
 void Window::timeIncrement() {
-    /*TODO: Implement time incrementation
-        - check if customer exists
-            - if so, check if they're done or not
-        - if no customer, update idle times as necessary
-    */
+    // increment time of customer
+    currentCustomer->timeIncrement();
+    if (currentCustomer) { // if there is a customer
+        // check if done
+        if (currentCustomer->needsNewQueue()){
+            currentCustomer = NULL;
+        }
+    }
+    else {
+        // iterate idle time if no customer
+        totalIdleTime++;
+        currentIdle++;
+
+        // update idle trackers based on time spent
+        if (currentIdle == 5) idlesOver5++;
+        if (currentIdle > longestIdleTime) 
+            longestIdleTime = currentIdle;
+    }
+}
+
+void Window::approachWindow(Customer* c) {
+    currentIdle = 0;
+    currentCustomer = c;
 }
 
 bool Window::isEmpty() {
     return (currentCustomer == NULL);
 }
 
-bool Window::isCustomerDone() {
-    //TODO: check if customer is done. if necessary, implement sending them back somehow
-    return false;
-}
+// bool Window::isCustomerDone() {
+//     //TODO: check if customer is done. if necessary, implement sending them back somehow
+//     return false;
+// }
 
 int Window::getLongestIdleTime() {
     return longestIdleTime;
