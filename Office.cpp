@@ -6,7 +6,9 @@ Office::Office(char name, int numWindows) {
     // create new windows for length of windows
     cout << "NUM FREAKING WINDOWS" << numWindows << endl;
     for (int i = 0; i < numWindows; ++i) {
+        cout << "yepper" << endl;
         Window *w = new Window();
+        cout << "noper" << endl;
         windows[i] = w;
         cout << "WINDOWS TEST: " << windows[i]->isEmpty() << endl;
     }
@@ -24,7 +26,7 @@ Office::Office(char name, int numWindows) {
 Office::~Office() {
     delete queue;
     for(int i = 0; i < numWindows; ++i){
-        windows[i];
+        delete windows[i];
     }
     delete[] windows;
 }
@@ -148,13 +150,14 @@ void Office::sendStudentToWindow(int windowNum) {
     }
     cout << "here" << endl;
     cout << windowNum << endl;
-    cout << windows[windowNum] << endl;
-    cout << queue->peek() << endl;
+    cout << windows[windowNum]->isEmpty() << endl;
+    cout << queue->peek()->notDone() << endl;
     //queue->remove();
-    Customer* testStu = new Customer(1, 1, 1, 'N', 'N', 'M');
-    windows[windowNum]->approachWindow(testStu);
-    delete testStu;
-    cout << "that worked bro" << endl;
+
+    //Customer* testStu = new Customer(1, 1, 1, 'N', 'N', 'M');
+    //windows[windowNum]->approachWindow(testStu);
+    //delete testStu;
+    //cout << "that worked bro" << endl;
 
     windows[windowNum]->approachWindow(queue->remove());
     cout << "there" << endl;

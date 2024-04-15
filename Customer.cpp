@@ -35,6 +35,7 @@
     }
 
     bool Customer::notDone(){
+        cout << currentQueue << endl;
         return (officeNum != 4);
     }
 

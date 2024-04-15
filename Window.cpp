@@ -45,6 +45,7 @@ void Window::approachWindow(Customer* c) {
 }
 
 bool Window::isEmpty() {
+    cout << longestIdleTime<< idlesOver5 << totalIdleTime << currentIdle << endl;
     return (currentCustomer == NULL);
 }
 
