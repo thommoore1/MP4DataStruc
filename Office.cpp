@@ -1,13 +1,15 @@
 #include "Office.h"
 
 Office::Office(char name, int numWindows) {
+    deleteThisToo = 0;
+
     queue = new Queue<Customer*>();
     windows = new Window*[numWindows];
     // create new windows for length of windows
     cout << "NUM FREAKING WINDOWS" << numWindows << endl;
     for (int i = 0; i < numWindows; ++i) {
         cout << "yepper" << endl;
-        Window *w = new Window();
+        Window *w = new Window("this worked");
         cout << "noper" << endl;
         windows[i] = w;
         cout << "WINDOWS TEST: " << windows[i]->isEmpty() << endl;
@@ -46,6 +48,7 @@ void Office::timeIncrement() {
         cout << "DEEP" << endl;
         // set to next variable
         openWindow = firstEmptyWindow();
+        cout << "EMPTY WINDOW???: " << openWindow;
         cout << "TEEP" << endl;
     }
     for(int i = 0; i < numWindows; ++i){
@@ -67,7 +70,11 @@ void Office::timeIncrement() {
 void Office::addStudentToQueue(Customer* s) {
     cout << "Student " << s <<  " added to queue" << endl;
     s->enterQueue(timeCounter); 
+    cout << "Keeper" << endl;
+    cout << s << endl;
+    cout << queue << endl;
     queue->insert(s);
+    cout << "sleeper" << endl;
     totalVisitors++;
 }
 
@@ -134,7 +141,9 @@ int Office::firstEmptyWindow() {
     */
 
     for (int i = 0; i < numWindows; ++i) {
-        if (windows[i]->isEmpty()) return i;
+        if (windows[i]->isEmpty()){
+            return i;
+        }
     }
 
     return -1;
@@ -148,10 +157,14 @@ void Office::sendStudentToWindow(int windowNum) {
         cout << "password" << endl;
         longestWaitTime = queue->peek()->exitQueue(timeCounter);
     }
-    cout << "here" << endl;
-    cout << windowNum << endl;
-    cout << windows[windowNum]->isEmpty() << endl;
-    cout << queue->peek()->notDone() << endl;
+
+    cout << "index test: " << windowNum << endl;
+    cout << "window opject exists test: " << windows[windowNum]->isEmpty() << endl;
+    cout << "window location: " << windows[windowNum] << endl;
+    cout << "student location: " << queue->peek() << endl;
+    cout << "Student exists test: " << queue->peek()->notDone() << endl;
+    
+
     //queue->remove();
 
     //Customer* testStu = new Customer(1, 1, 1, 'N', 'N', 'M');
@@ -159,8 +172,28 @@ void Office::sendStudentToWindow(int windowNum) {
     //delete testStu;
     //cout << "that worked bro" << endl;
 
-    windows[windowNum]->approachWindow(queue->remove());
-    cout << "there" << endl;
+    //windows[] - array of windows, printing it shows the one being accessed exists
+    //windowNum - 0
+    //queue->remove() - should be working
+
+    cout << "WHICH LOOP: " << deleteThisToo << endl;
+
+    if(deleteThisToo == 7){
+        //Customer* test = new Customer(2,2,2,'N','N','N');
+        Customer* test2 = new Customer(queue->remove());
+        windows[windowNum]->approachWindow(test2);
+    }
+    else{
+        cout << "here we go" << endl;
+    
+        windows[windowNum]->approachWindow(queue->remove());
+    
+        cout << "there" << endl;
+    }
+
+    ++deleteThisToo;
+
+    
 }
 
 void Office::addToWaitTime() {
@@ -180,33 +213,44 @@ void Office::makeQueuePrepArray(int sn){
 }
  
 void Office::addQueueFromOtherOffice(){
+    cout << "broke" << endl;
     for(int i = 0; i < queuePrepIndex; ++i){
+        cout << ")" << endl;
         if(queuePrep[i] == NULL){
+            cout << "!" << endl;
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'C' && officeName != 'C'){
+            cout << "@" << endl;
             addStudentToQueue(queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
+        cout << "(" << endl;
         if(queuePrep[i] == NULL){
+            cout << "#" << endl;
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'F' && officeName != 'F'){
+            cout << "$" << endl;
             addStudentToQueue(queuePrep[i]);
         }
     }
     for(int i = 0; i < queuePrepIndex; ++i){
+        cout << "*" << endl;
         if(queuePrep[i] == NULL){
+            cout << "%" << endl;
             break;
         }
         if(queuePrep[i]->getNextOffice() == 'R' && officeName != 'R'){
+            cout << "^" << endl;
             addStudentToQueue(queuePrep[i]);
         }
     }
 
     for(int i = 0; i < queuePrepIndex; ++i){
         if(queuePrep[i] == NULL){
+            cout << "&" << endl;
             break;
         }
         queuePrep[i] == NULL;

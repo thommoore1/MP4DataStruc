@@ -20,8 +20,11 @@ ListNode<T>::ListNode(){}
 
 template <typename T>
 ListNode<T>::ListNode(T d){
+    cout << "uhhh" << endl;
     data = d;
+    cout << "uhhhhhh" << endl;
     next = NULL;
+    cout << "uhhhhhhhhhh" << endl;
     prev = NULL;
 }
 
@@ -99,12 +102,16 @@ void DblList<T>::insertFront(T d){
 
 template <typename T>
 void DblList<T>::insertBack(T d){
+    cout << "RAH" << endl;
     ListNode<T> *node = new ListNode<T>(d);
+    cout << "yah" << endl;
 
     if(isEmpty()){
+        cout << "YEE" << endl;
         front = node;
     }
     else {
+        cout << "DEET" << endl;
         node->prev = back;
         back->next = node;
     }

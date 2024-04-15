@@ -8,7 +8,7 @@ using namespace std;
 class Window {
 
     public:
-        Window();
+        Window(string deleteThisLater);
         ~Window();
 
         void timeIncrement();
@@ -22,6 +22,7 @@ class Window {
         int getTotalIdleTime();
 
     private:
+        string alsoDeleteThis;
         // time tracking variables
         int longestIdleTime;
         int idlesOver5;

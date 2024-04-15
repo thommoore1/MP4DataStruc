@@ -101,7 +101,7 @@ ServiceCenter::ServiceCenter(string fileName){
     //finAid->timeIncrement(); //TODO: DELETE
 
     while(studentsNotDone()){
-        cout << "I love Rene German" << endl;
+        cout << "I love this" << endl;
         if(joinTimeQueue->isEmpty() && time == joinTimeQueue->peek()){//time is equal to next student join time
             cout << "AFDHFSDHDFSH" << endl;
             joinTimeQueue->remove();
@@ -217,6 +217,7 @@ void ServiceCenter::printFinalData(){
 }
 
 bool ServiceCenter::studentsNotDone(){
+    cout << endl << endl << endl;
     for(int i = 0; i < studentCount; ++i){
         if(stuArray[i]->notDone()){
             return true;

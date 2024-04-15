@@ -1,5 +1,20 @@
     #include "Customer.h"
 
+    Customer::Customer(Customer* c){
+        timeWaited = c->timeWaited;
+        initialQueueTime = c->initialQueueTime;
+        currentQueue = c->currentQueue;
+        officeNum = c->officeNum;
+        officeTimes = new int[3];
+        officeTimes[0] = c->officeTimes[0];
+        officeTimes[1] = c->officeTimes[1];
+        officeTimes[2] = c->officeTimes[2];
+        officeOrder = new char[3];
+        officeOrder[0] = c->officeOrder[0];
+        officeOrder[1] = c->officeOrder[1];
+        officeOrder[2] = c->officeOrder[2];
+    }
+
     Customer::Customer(){
         currentQueue = 'N';
     }
@@ -19,6 +34,8 @@
         officeOrder[2] = officeC;
 
         cout << " THIS IS TOM: " << currentQueue << endl;
+
+        testVariable = timeAtOfficeA;
     }
 
     Customer::~Customer(){
@@ -35,7 +52,7 @@
     }
 
     bool Customer::notDone(){
-        cout << currentQueue << endl;
+        cout << "Hello this is a test: " << testVariable << endl;
         return (officeNum != 4);
     }
 

@@ -35,7 +35,9 @@ Queue<T>::~Queue(){
 
 template <typename T>
 void Queue<T>::insert(T d){
+    cout << "yep" << endl;
     myQueue->insertBack(d);
+    cout << "hello" << endl;
 }
 
 template <typename T>

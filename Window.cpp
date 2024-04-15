@@ -1,6 +1,8 @@
 #include "Window.h"
 
-Window::Window() {
+Window::Window(string deleteThisLater) {
+    alsoDeleteThis = deleteThisLater; 
+
     longestIdleTime = 0;
     idlesOver5 = 0;
     totalIdleTime = 0;
@@ -40,12 +42,17 @@ void Window::timeIncrement() {
 
 void Window::approachWindow(Customer* c) {
     cout << "arrrr" << endl;
+    cout << "APPROACH WINDOW CURRENT C: " << c;
     currentIdle = 0;
     currentCustomer = c;
 }
 
 bool Window::isEmpty() {
-    cout << longestIdleTime<< idlesOver5 << totalIdleTime << currentIdle << endl;
+    currentCustomer = new Customer();
+    cout << "WINDOW CURRENT CUSTOMER: " << currentCustomer << endl;
+    delete currentCustomer;
+    currentCustomer = NULL;
+    cout << alsoDeleteThis << endl;
     return (currentCustomer == NULL);
 }
 

@@ -10,6 +10,7 @@ class Customer{
         Customer();
         Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char officeA, char officeB, char officeC);
         ~Customer();
+        Customer(Customer* c);
 
         char getNextOffice();
         bool needsNewQueue();
@@ -20,6 +21,8 @@ class Customer{
         int exitQueue(int exitTime);
 
     private:
+        int testVariable; //TODO: delete later
+
         int timeWaited;
         int initialQueueTime;
         int officeNum;

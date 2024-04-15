@@ -36,6 +36,7 @@ class Office {
 
 
     private:
+        int deleteThisToo;
 
         Customer** queuePrep; //TODO: constructor
         int stuNum;
