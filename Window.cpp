@@ -16,14 +16,17 @@ Window::~Window() {
 
 void Window::timeIncrement() {
     cout << "window time increment " << endl;
+    cout << "window has current customer test: " << currentCustomer << endl;
     // increment time of customer
-    if(currentCustomer){
+    if(currentCustomer != NULL){
+        cout << "did work?" << endl;
         currentCustomer->timeIncrement();
     }
     cout << "current customer worked" << endl;    
     if (currentCustomer) { // if there is a customer
         // check if done
         if (currentCustomer->needsNewQueue()){
+            cout << "currentCustomer set to null" << endl;
             currentCustomer = NULL;
         }
     }
@@ -45,6 +48,7 @@ void Window::approachWindow(Customer* c) {
     cout << "APPROACH WINDOW CURRENT C: " << c;
     currentIdle = 0;
     currentCustomer = c;
+    //currentCustomer->setOffice();
 }
 
 bool Window::isEmpty() {

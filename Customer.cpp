@@ -1,9 +1,9 @@
     #include "Customer.h"
 
-    Customer::Customer(Customer* c){
+    Customer::Customer(Customer* c){ //TODO: Delete
         timeWaited = c->timeWaited;
         initialQueueTime = c->initialQueueTime;
-        currentQueue = c->currentQueue;
+        currentOffice = c->currentOffice;
         officeNum = c->officeNum;
         officeTimes = new int[3];
         officeTimes[0] = c->officeTimes[0];
@@ -16,13 +16,13 @@
     }
 
     Customer::Customer(){
-        currentQueue = 'N';
+        currentOffice = 'N';
     }
 
     Customer::Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char officeA, char officeB, char officeC){
         timeWaited = 0;
         initialQueueTime = 0;
-        currentQueue = 'N';
+        currentOffice = 'N';
         officeNum = 0;
         officeTimes = new int[3];
         officeTimes[0] = timeAtOfficeA;
@@ -33,7 +33,7 @@
         officeOrder[1] = officeB;
         officeOrder[2] = officeC;
 
-        cout << " THIS IS TOM: " << currentQueue << endl;
+        cout << " THIS IS TOM: " << currentOffice << endl;
 
         testVariable = timeAtOfficeA;
     }
@@ -48,28 +48,34 @@
     }
 
     bool Customer::needsNewQueue(){
-        return (currentQueue == 'N');
+        return (currentOffice == 'N');
     }
 
     bool Customer::notDone(){
-        cout << "Hello this is a test: " << testVariable << endl;
-        return (officeNum >= 4);
+        cout << "Hello this is a test: " << officeNum << endl;
+        return (officeNum < 3);
     }
 
-    void Customer::setCurrentQueue(char newQueue){
-        currentQueue = newQueue;
+    void Customer::setCurrentOffice(char newQueue){
+        currentOffice = newQueue;
     }
 
     void Customer::timeIncrement(){
         cout << "student time increment. YES" << endl;
-        cout << currentQueue << endl;
+        cout << "Current Office Num: " << officeNum << endl;
+        cout << currentOffice << endl;
         cout << "is this the problem" << endl;
 
-        if(officeNum < 3 && timeWaited == officeTimes[officeNum]){
-            cout << "office num not the problem" << endl;
-            ++officeNum;
-            timeWaited = 0;
-            currentQueue = 'N';
+        ++timeWaited;
+
+        if(officeNum < 3){
+            cout << "Time waited: " << timeWaited << " and office Time: " << officeTimes[officeNum] << endl;
+            if(timeWaited == officeTimes[officeNum]){
+                cout << "office num not the problem" << endl;
+                ++officeNum;
+                timeWaited = 0;
+                currentOffice = 'N';
+            }
         }
         cout << "yodle" << endl;
     }

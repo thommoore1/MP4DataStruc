@@ -96,23 +96,34 @@ ServiceCenter::ServiceCenter(string fileName){
     int stuJoinIndex = 0;
     int studentmax;
     int newStudentMax = 0;
+    int currentStudentNum = 0;
 
     cout << "oops" << endl;
     //finAid->timeIncrement(); //TODO: DELETE
 
     while(studentsNotDone()){
         cout << "I love this" << endl;
-        if(joinTimeQueue->isEmpty() && time == joinTimeQueue->peek()){//time is equal to next student join time
+        if(!joinTimeQueue->isEmpty()){
+        cout << "TIME: " << time << " and join time: " << joinTimeQueue->peek() << endl;
+        }
+        if(!(joinTimeQueue->isEmpty()) && time == joinTimeQueue->peek()){//time is equal to next student join time
             cout << "AFDHFSDHDFSH" << endl;
             joinTimeQueue->remove();
             stuJoinIndex = newStudentMax;
             studentmax = numOfStudentsQueue->remove();
+
+
+            cout << "join index: " << stuJoinIndex << endl;
+            cout << "student max: " << studentmax << endl;
+
+
             for(int i = stuJoinIndex; i < (stuJoinIndex + studentmax); ++i){
+                ++currentStudentNum;
                 cout << "for loopy loop" << endl;
                 cout << i << endl;
                 cout << stuArray[i]->notDone() << endl;
                 if(stuArray[i]->getNextOffice() == 'F'){
-                    cout << "RUSSIAN" << endl;
+                    cout << "taters" << endl;
                     finAid->addStudentToQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
@@ -124,7 +135,7 @@ ServiceCenter::ServiceCenter(string fileName){
                     cashier->addStudentToQueue(stuArray[i]);
                 }
                 cout << "DANIEL" << endl;
-                newStudentMax = i;
+                newStudentMax = i + 1;
             }
         }
 
@@ -137,22 +148,22 @@ ServiceCenter::ServiceCenter(string fileName){
 
         cout << "THOMAS" << endl;
 
-        cout << "Student count: " << studentCount << endl;
+        cout << "current Student count: " << currentStudentNum << endl;
 
-        for(int i = 0; i < studentCount; ++i){ //moving students to new offices if done
+        for(int i = 0; i < currentStudentNum; ++i){ //moving students to new offices if done
             cout << "new queue for index " << i << endl;
             if(stuArray[i]->needsNewQueue()){
                 cout << "needs new queue" << endl;
                 if(stuArray[i]->getNextOffice() == 'F'){
-                    cout << "prep fin aid" << endl;
+                    cout << "prep123 fin aid" << endl;
                     finAid->prepStudentForQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
-                    cout << "prep registrar" << endl;
+                    cout << "prep123 registrar" << endl;
                     registrar->prepStudentForQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'C'){
-                    cout << "cashier prep" << endl;
+                    cout << "prep123 cashier" << endl;
                     cashier->prepStudentForQueue(stuArray[i]);
                 }
             }
@@ -225,6 +236,14 @@ void ServiceCenter::printFinalData(){
 }
 
 bool ServiceCenter::studentsNotDone(){
+
+    // if(time == 10){ //TODO: DELETE THIS
+    //      for(int i = 0; i < studentCount; ++i){
+    //         cout << stuArray[i]->notDone() << endl;
+    //      }
+    //      return false;
+    // }
+
     cout << endl << endl << endl;
     for(int i = 0; i < studentCount; ++i){
         if(stuArray[i]->notDone()){

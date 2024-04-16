@@ -15,7 +15,7 @@ class Customer{
         char getNextOffice();
         bool needsNewQueue();
         bool notDone();
-        void setCurrentQueue(char newQueue);
+        void setCurrentOffice(char newQueue);
         void timeIncrement();
         void enterQueue(int enterTime);
         int exitQueue(int exitTime);
@@ -28,7 +28,7 @@ class Customer{
         int officeNum;
         int* officeTimes;
         char* officeOrder;
-        char currentQueue;
+        char currentOffice;
 };
 
 #endif
