@@ -152,6 +152,7 @@ ServiceCenter::ServiceCenter(string fileName){
         }
 
         cout << "We all vote" << endl;
+        cout << "TIME: " << time << endl;
 
         finAid->addQueueFromOtherOffice();
         registrar->addQueueFromOtherOffice();
