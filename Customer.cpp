@@ -53,7 +53,7 @@
 
     bool Customer::notDone(){
         cout << "Hello this is a test: " << testVariable << endl;
-        return (officeNum != 4);
+        return (officeNum >= 4);
     }
 
     void Customer::setCurrentQueue(char newQueue){
@@ -65,7 +65,7 @@
         cout << currentQueue << endl;
         cout << "is this the problem" << endl;
 
-        if(timeWaited == officeTimes[officeNum]){
+        if(officeNum < 3 && timeWaited == officeTimes[officeNum]){
             cout << "office num not the problem" << endl;
             ++officeNum;
             timeWaited = 0;

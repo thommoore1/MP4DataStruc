@@ -48,11 +48,6 @@ void Window::approachWindow(Customer* c) {
 }
 
 bool Window::isEmpty() {
-    currentCustomer = new Customer();
-    cout << "WINDOW CURRENT CUSTOMER: " << currentCustomer << endl;
-    delete currentCustomer;
-    currentCustomer = NULL;
-    cout << alsoDeleteThis << endl;
     return (currentCustomer == NULL);
 }
 

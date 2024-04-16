@@ -203,11 +203,16 @@ void Office::addToWaitTime() {
 }
 
 void Office::prepStudentForQueue(Customer *c){
+    cout << "broke here" << endl;
+    cout << "Customer Test: " << c->notDone() << endl;
+    cout << "Queue Prep Index: " << queuePrepIndex << endl;
     queuePrep[queuePrepIndex] = c;
+    cout << "queue has been prepperd" << endl;
     ++queuePrepIndex;
 }
 
 void Office::makeQueuePrepArray(int sn){
+    cout << "QUEUE PREP ARRAY SIZE: " << sn << endl;
     queuePrep = new Customer*[sn];
     queuePrepIndex = 0;
 }
@@ -255,4 +260,5 @@ void Office::addQueueFromOtherOffice(){
         }
         queuePrep[i] == NULL;
     }
+    queuePrepIndex = 0;
 }

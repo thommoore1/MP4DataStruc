@@ -137,15 +137,22 @@ ServiceCenter::ServiceCenter(string fileName){
 
         cout << "THOMAS" << endl;
 
+        cout << "Student count: " << studentCount << endl;
+
         for(int i = 0; i < studentCount; ++i){ //moving students to new offices if done
+            cout << "new queue for index " << i << endl;
             if(stuArray[i]->needsNewQueue()){
+                cout << "needs new queue" << endl;
                 if(stuArray[i]->getNextOffice() == 'F'){
+                    cout << "prep fin aid" << endl;
                     finAid->prepStudentForQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
+                    cout << "prep registrar" << endl;
                     registrar->prepStudentForQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'C'){
+                    cout << "cashier prep" << endl;
                     cashier->prepStudentForQueue(stuArray[i]);
                 }
             }
