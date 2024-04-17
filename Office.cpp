@@ -171,7 +171,7 @@ void Office::sendStudentToWindow(int windowNum) {
     cout << "this dude is null isnt he: " << queue->peek() << endl;
     if(queue->peek()->exitQueue(timeCounter) > longestWaitTime){
         cout << "password" << endl;
-        longestWaitTime = queue->peek()->exitQueue(timeCounter);
+        longestWaitTime = queue->peek()->exitQueue(timeCounter) - 1;
     }
 
     cout << "index test: " << windowNum << endl;

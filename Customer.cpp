@@ -81,7 +81,6 @@
     }
 
     void Customer::enterQueue(int enterTime) {
-        cout << "" << endl;
         initialQueueTime = enterTime;
     }
 
