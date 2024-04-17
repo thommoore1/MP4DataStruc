@@ -120,7 +120,7 @@ int Office::getVisitsOver10() {
     return visitsOver10;
 }
 
-int Office::getMeanIdleTime() {
+double Office::getMeanIdleTime() {
     int totalIdleTime = 0;
     for (int i = 0; i < numWindows; ++i) {
         // add idle time of window to total

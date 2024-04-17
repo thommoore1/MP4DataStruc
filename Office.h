@@ -30,7 +30,7 @@ class Office {
         int getVisitsOver10();
 
         // get total idle time
-        int getMeanIdleTime();
+        double getMeanIdleTime();
         int getLongestIdleTime();
         int getTotalIdleOver5();
 
