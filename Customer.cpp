@@ -1,23 +1,6 @@
 #include "Customer.h"
 
-Customer::Customer(Customer* c){ //TODO: Delete
-    timeWaited = c->timeWaited;
-    initialQueueTime = c->initialQueueTime;
-    currentOffice = c->currentOffice;
-    officeNum = c->officeNum;
-    officeTimes = new int[3];
-    officeTimes[0] = c->officeTimes[0];
-    officeTimes[1] = c->officeTimes[1];
-    officeTimes[2] = c->officeTimes[2];
-    officeOrder = new char[3];
-    officeOrder[0] = c->officeOrder[0];
-    officeOrder[1] = c->officeOrder[1];
-    officeOrder[2] = c->officeOrder[2];
-}
-
-Customer::Customer(){
-    currentOffice = 'N';
-}
+Customer::Customer(){}
 
 Customer::Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char officeA, char officeB, char officeC){
     timeWaited = 0;
@@ -33,8 +16,6 @@ Customer::Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char
     officeOrder[0] = officeA;
     officeOrder[1] = officeB;
     officeOrder[2] = officeC;
-
-    testVariable = timeAtOfficeA;
 }
 
 Customer::~Customer(){
@@ -78,7 +59,7 @@ void Customer::timeIncrement(){
             currentOffice = 'N';
 
             // check if student is not supposed to spend any time here
-            while(nextOfficeIsZero()){
+            while(nextOfficeIsZero()){ //If the student is not spending any time at their next office, move them to the next one, until they are finished
                 zeroMove();
 
                 if(!(notDone())){

@@ -1,34 +1,33 @@
 #include "ServiceCenter.h"
 
 ServiceCenter::ServiceCenter(string fileName){
-    string line;
-    int count = -1;
-    int count2 = -1;
-    ifstream readFile(fileName);
-    if(readFile.good()){
+    string line; //for file reading
+    int count = -1; //for counting number of lines that have been read
+    ifstream readFile(fileName); //for file reading
+    if(readFile.good()){ //If the file doesn't exist, error
 
-    timeOrStudentNum = 't';
+    timeOrStudentNum = 't'; //This variable is used after the first 3 lines (num of windows) have been read. It keeps track of if the line being read is going to be the time the students enter, or the number of students entering at that time
 
-    numOfStudentsQueue = new Queue<int>();
+    numOfStudentsQueue = new Queue<int>(); // Queue for the number of students joining at one time
     joinTimeQueue = new Queue<int>(); // This is a queue for times when students join. NOT joining a Timequeue.   Queue<int>* studentNum = new Queue<int>();
-    studentQueue = new Queue<Customer*>();
+    studentQueue = new Queue<Customer*>(); // This is a queue of customers
     
-    studentCount = 0;
+    studentCount = 0; //total number of students
 
     if(readFile.is_open()){
         while(getline(readFile,line)){
-            ++count;
-            if(count == 0){
+            ++count; //number of lines read
+            if(count == 0){ //if it is the first line read, make registrar with that line
                 registrar = new Office('R', stoi(line));
             }
-            else if(count == 1){
+            else if(count == 1){ //if it is the second line read, make cashier with that line
                 cashier = new Office('C', stoi(line));
             }
-            else if(count == 2){
+            else if(count == 2){ //if it is third line, make finaid with that line
                 finAid = new Office('F', stoi(line));
             }
             else{
-                if(line.size() > 1){//check if it is player data
+                if(line.size() > 1){//check if it is player data (the only input greater than one in size)
                     string lineData = line;
 
                     /* 
@@ -56,21 +55,21 @@ ServiceCenter::ServiceCenter(string fileName){
                     Customer* stu = new Customer(time1, time2, time3, office1, office2, office3);
                     studentQueue->insert(stu);
                 }
-                else if(timeOrStudentNum == 't'){//check if is time variable
-                    joinTimeQueue->insert(stoi(line));
-                    timeOrStudentNum = 's';
+                else if(timeOrStudentNum == 't'){//check if the given line is the enter time
+                    joinTimeQueue->insert(stoi(line)); //adds variable to queue
+                    timeOrStudentNum = 's'; // the next time line size == 1, it will be giving the num of students data, so changing the variable for future if statement
                 }
-                else if(timeOrStudentNum == 's'){//check if it is num of students variable
-                    studentCount += stoi(line);
-                    numOfStudentsQueue->insert(stoi(line));
-                    timeOrStudentNum = 't';
+                else if(timeOrStudentNum == 's'){//check if given line is num of students entering
+                    studentCount += stoi(line); //updates number of students
+                    numOfStudentsQueue->insert(stoi(line)); //adds data to queue
+                    timeOrStudentNum = 't'; // the next time line size == 1, it will be giving the join time data, so changing the variable for future if statement
                 }
             }
         }
     }
 
 
-    //TODO: proper comment
+    //This initalizes an array in each office that is the size of total number of students. This array is used for moving students from one office to another
     registrar->makeQueuePrepArray(studentCount);
     finAid->makeQueuePrepArray(studentCount);
     cashier->makeQueuePrepArray(studentCount);
@@ -78,22 +77,24 @@ ServiceCenter::ServiceCenter(string fileName){
     stuArray = new Customer*[studentCount]; //adding student queue to student array
     int index = -1;
 
-    while(!(studentQueue->isEmpty())){
+    while(!(studentQueue->isEmpty())){ //adding queue to array (we can no longer use queue, because we will need to access multiple indexes, but could not use an array before, because we did not know the size)
         stuArray[++index] = studentQueue->remove();
     }
 
     delete studentQueue;
     
     time = 1;
+
+    //Below used for adding new students to their first queues. Explination seen in for loop comment
     int stuJoinIndex = 0;
     int studentmax;
     int newStudentMax = 0;
     int currentStudentNum = 0;
 
 
-    while(studentsNotDone()){
+    while(studentsNotDone()){ //will keep looping until all students are done
         if(!(joinTimeQueue->isEmpty()) && time == joinTimeQueue->peek()){//time is equal to next student join time
-            joinTimeQueue->remove();
+            joinTimeQueue->remove(); //we no longer need this, so we remove it from the queue
             stuJoinIndex = newStudentMax;
             studentmax = numOfStudentsQueue->remove();
 
@@ -137,14 +138,13 @@ ServiceCenter::ServiceCenter(string fileName){
         registrar->addQueueFromOtherOffice();
         cashier->addQueueFromOtherOffice();
     }
-
+    //print stuff
     printFinalData();
 
     }
     else{
         cerr << "Please put in a correctly formatted file name. File may be broken" << endl;
     }
-    //print stuff
 }
 
 void ServiceCenter::printFinalData(){
@@ -208,3 +208,5 @@ ServiceCenter::~ServiceCenter() {
     delete finAid;
     delete cashier;
 }
+
+ServiceCenter::ServiceCenter(){}

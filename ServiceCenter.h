@@ -15,6 +15,7 @@ using namespace std;
 class ServiceCenter{
     public:
         ServiceCenter(string fileName);
+        ServiceCenter();
         ~ServiceCenter();
 
     private:

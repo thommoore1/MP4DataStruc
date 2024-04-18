@@ -7,7 +7,7 @@ Office::Office(char name, int numWindows) {
     windows = new Window*[numWindows];
     // create new windows for length of windows
     for (int i = 0; i < numWindows; ++i) {
-        Window *w = new Window("this worked");
+        Window *w = new Window();
         windows[i] = w;
     }
     officeName = name;
@@ -20,6 +20,8 @@ Office::Office(char name, int numWindows) {
     visitsOver10 = 0;
     timeCounter = 0;
 }
+
+Office::Office(){}
 
 Office::~Office() {
     delete queue;

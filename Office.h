@@ -11,6 +11,7 @@ using namespace std;
 class Office {
 
     public:
+        Office();
         Office(char officeName, int numWindows);
         ~Office();
 

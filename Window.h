@@ -8,7 +8,7 @@ using namespace std;
 class Window {
 
     public:
-        Window(string deleteThisLater);
+        Window();
         ~Window();
 
         void timeIncrement();

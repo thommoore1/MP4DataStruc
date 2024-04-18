@@ -1,6 +1,6 @@
 #include "Window.h"
 
-Window::Window(string deleteThisLater) {
+Window::Window() {
     longestIdleTime = 0;
     idlesOver5 = 0;
     totalIdleTime = 0;
