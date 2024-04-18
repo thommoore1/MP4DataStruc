@@ -105,8 +105,11 @@ ServiceCenter::ServiceCenter(string fileName){
         }
 
         ++time;
+        cout << "finaid: ";
         finAid->timeIncrement();
+        cout << "registrar: ";
         registrar->timeIncrement();
+        cout << "cashier: ";
         cashier->timeIncrement();
 
         for(int i = 0; i < currentStudentNum; ++i){ //moving students to new offices if done

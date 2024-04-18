@@ -73,6 +73,17 @@ void Customer::timeIncrement(){
             ++officeNum;
             timeWaited = 0;
             currentOffice = 'N';
+
+            // check if student is not supposed to spend any time here
+            while(nextOfficeIsZero()){
+                zeroMove();
+
+                if(!(notDone())){
+                    cout << "THIS SHOULD HAPPEN ONCE" << endl;
+                    break;
+                }
+                
+            }
         }
     }
 }

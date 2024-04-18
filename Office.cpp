@@ -51,19 +51,6 @@ void Office::timeIncrement() {
 
 void Office::addStudentToQueue(Customer* s) {
 
-    // check if student is not supposed to spend any time here
-
-    while(s->nextOfficeIsZero()){
-        cout << "THIS SHOULD HAPPEN TWICE" << endl;
-        s->zeroMove();
-
-        if(!(s->notDone())){
-            cout << "THIS SHOULD HAPPEN ONCE" << endl;
-            break;
-        }
-        
-    }
-
     if(s->notDone()){
         // updates student office
         s->setCurrentOffice(officeName);
@@ -161,6 +148,7 @@ void Office::addToWaitTime() {
 }
 
 void Office::prepStudentForQueue(Customer *c){
+    
     queuePrep[queuePrepIndex] = c;
     ++queuePrepIndex;
 }

@@ -22,8 +22,8 @@ class Window {
         int getTotalIdleTime();
 
     private:
-        string alsoDeleteThis;
         // time tracking variables
+        int currentTime;
         int longestIdleTime;
         int idlesOver5;
         int currentIdle;
