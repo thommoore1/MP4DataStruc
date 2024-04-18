@@ -41,34 +41,35 @@ Customer::~Customer(){
     delete[] officeOrder;
 }
 
-char Customer::getNextOffice(){
+char Customer::getNextOffice(){ // gets the next office char
     return officeOrder[officeNum];
 }
 
-bool Customer::needsNewQueue(){
+bool Customer::needsNewQueue(){ // tells if student needs to be put to a new queue
     return (currentOffice == 'N');
 }
 
-bool Customer::notDone(){
+bool Customer::notDone(){ // checks if customer is not done with everything
     return (officeNum < 3);
 }
 
-void Customer::setCurrentOffice(char newQueue){
+void Customer::setCurrentOffice(char newQueue){ // updates the char of the current office
     currentOffice = newQueue;
 }
 
 void Customer::timeIncrement(){
 
-
+    // iterates through all offices and iterates officeNum if the time is at 0
     for(int i = 0; i < 3; ++i){
         if(officeNum < 3 && officeTimes[officeNum] == 0){
             ++officeNum;
         }
     }
 
-
+    // iterates time waited
     ++timeWaited;
     if(officeNum < 3){
+        // checks if student is done with this specific office
         if(timeWaited == officeTimes[officeNum]){
             ++officeNum;
             timeWaited = 0;
@@ -79,7 +80,6 @@ void Customer::timeIncrement(){
                 zeroMove();
 
                 if(!(notDone())){
-                    cout << "THIS SHOULD HAPPEN ONCE" << endl;
                     break;
                 }
                 
@@ -88,6 +88,9 @@ void Customer::timeIncrement(){
     }
 }
 
+/*
+    enter and exit queues are used to keep track of customer's wait times in the queue for an office
+*/
 void Customer::enterQueue(int enterTime) {
     initialQueueTime = enterTime;
 }
@@ -96,10 +99,10 @@ int Customer::exitQueue(int exitTime) {
     return (exitTime - initialQueueTime);
 }
 
-bool Customer::nextOfficeIsZero(){
+bool Customer::nextOfficeIsZero(){ // checks if the next office has a 0 time value
     return(officeTimes[officeNum] == 0);
 }
 
-void Customer::zeroMove(){
+void Customer::zeroMove(){ // adjustment function for if the nextOfficeIsZero() is true
     ++officeNum;
 }
