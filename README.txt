@@ -22,4 +22,4 @@ References: No references used
 ----- 
 How to run:
 - Compile in the docker container using: `g++ *.cpp`
-- Run the code using `./a.out`, making sure that your input text file is called "input.txt"
+- Run the code using `./a.out [inputfile]`, replaceing [inputfile] with your file name
