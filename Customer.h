@@ -21,6 +21,7 @@ class Customer{
         int exitQueue(int exitTime);
         bool nextOfficeIsZero();
         void zeroMove();
+        char getPrevOffice();
 
     private:
         int testVariable; //TODO: delete later
@@ -31,6 +32,7 @@ class Customer{
         int* officeTimes;
         char* officeOrder;
         char currentOffice;
+        char previousOffice;
 };
 
 #endif

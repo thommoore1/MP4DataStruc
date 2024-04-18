@@ -151,45 +151,35 @@ void ServiceCenter::printFinalData(){
     // 5. The longest window idle time for each office
     // 6. Number of windows idle for over 5 minutes across all office
 
-    cout << "---- Student Center Stats ----" << endl;
+    cout << "Cashier's Office:" << endl;
+    cout << "Mean student wait time: " << to_string(cashier->getMeanWaitTime()) << " tick(s)" << endl;
+    cout << "Mean window idle time: " << to_string(cashier->getMeanIdleTime()) << " ticks(s)" << endl;
+    cout << "Longest student wait time: " << cashier->getLongestWaitTime() << " ticks(s)" << endl;
+    cout << "Longest window idle time: " << cashier->getLongestIdleTime() << " ticks(s)" << endl << endl;
 
-    cout << "The mean student wait time for cashier is: " << to_string(cashier->getMeanWaitTime()) << endl;
-    cout << "The mean student wait time for financial aid is: " << to_string(finAid->getMeanWaitTime()) << endl;
-    cout << "The mean student wait time for registrar is: " << to_string(registrar->getMeanWaitTime()) << endl;
-    
-    cout << "----" << endl;
-    
-    cout << "The longest student wait time for cashier is: " << cashier->getLongestWaitTime() << endl;
-    cout << "The longest student wait time for financial aid is: " << finAid->getLongestWaitTime() << endl;
-    cout << "The longest student wait time for registrar is: " << registrar->getLongestWaitTime() << endl;
-    
-    cout << "----" << endl;
-    
+    cout << "Financial Aid Office:" << endl;
+    cout << "Mean student wait time: " << to_string(finAid->getMeanWaitTime()) << " ticks(s)" << endl;
+    cout << "Mean window idle time: " << to_string(finAid->getMeanIdleTime()) << " ticks(s)" << endl;
+    cout << "Longest student wait time: " << finAid->getLongestWaitTime() << " ticks(s)" << endl;
+    cout << "Longest window idle time: " << finAid->getLongestIdleTime() << " ticks(s)" << endl << endl;
+
+    cout << "Registrar's Office" << endl;
+    cout << "Mean student wait time: " << to_string(registrar->getMeanWaitTime()) << " ticks(s)" << endl;
+    cout << "Mean window idle time: " << to_string(registrar->getMeanIdleTime()) << " ticks(s)" << endl;
+    cout << "Longest student wait time: " << registrar->getLongestWaitTime() << " ticks(s)" << endl;
+    cout << "Longest window idle time: " << registrar->getLongestIdleTime() << " ticks(s)" << endl << endl;
+
     int numOfStudents = cashier->getVisitsOver10();
     numOfStudents += finAid->getVisitsOver10();
     numOfStudents += registrar->getVisitsOver10();
-    cout << "The number of students waiting over 10 minutes across all offices was " << numOfStudents << endl;
 
-    cout << "----" << endl;
-
-    cout << "The mean window idle time for the cashier is: " << to_string(cashier->getMeanIdleTime()) << endl;
-    cout << "The mean window idle time for the financial aid is: " << to_string(finAid->getMeanIdleTime()) << endl;
-    cout << "The mean window idle time for the registrar is: " << to_string(registrar->getMeanIdleTime()) << endl;
-    
-    cout << "----" << endl;
-
-    cout << "The longest window idle time for the cashier is: " << cashier->getLongestIdleTime() << endl;
-    cout << "The longest window idle time for the financial aid is: " << finAid->getLongestIdleTime() << endl;
-    cout << "The longest window idle time for the registrar is: " << registrar->getLongestIdleTime() << endl;
-    
-    cout << "----" << endl;
+    cout << "Number of students waiting over 10 minutes across all offices: " << numOfStudents << " tick(s)" << endl;
 
     int fiveMinWindow = cashier->getTotalIdleOver5();
     fiveMinWindow += registrar->getTotalIdleOver5();
     fiveMinWindow += finAid->getTotalIdleOver5();
-    cout << "The number of windows idle for at least 5 mins across all offices is " << fiveMinWindow << endl;
 
-    cout << "----" << endl;
+    cout << "Number of windows idle for over 5 minutes across all offices: " << fiveMinWindow << " tick(s)" << endl;
 }
 
 bool ServiceCenter::studentsNotDone(){

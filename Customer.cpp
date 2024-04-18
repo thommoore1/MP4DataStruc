@@ -23,6 +23,7 @@ Customer::Customer(int timeAtOfficeA, int timeAtOfficeB, int timeAtOfficeC, char
     timeWaited = 0;
     initialQueueTime = 0;
     currentOffice = 'N';
+    previousOffice = 'N';
     officeNum = 0;
     officeTimes = new int[3];
     officeTimes[0] = timeAtOfficeA;
@@ -73,6 +74,7 @@ void Customer::timeIncrement(){
         if(timeWaited == officeTimes[officeNum]){
             ++officeNum;
             timeWaited = 0;
+            previousOffice = currentOffice;
             currentOffice = 'N';
 
             // check if student is not supposed to spend any time here
@@ -105,4 +107,8 @@ bool Customer::nextOfficeIsZero(){ // checks if the next office has a 0 time val
 
 void Customer::zeroMove(){ // adjustment function for if the nextOfficeIsZero() is true
     ++officeNum;
+}
+
+char Customer::getPrevOffice(){
+    return previousOffice;
 }
