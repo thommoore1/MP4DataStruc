@@ -1,8 +1,6 @@
 #include "Window.h"
 
 Window::Window(string deleteThisLater) {
-
-    currentTime = 0;
     longestIdleTime = 0;
     idlesOver5 = 0;
     totalIdleTime = 0;
@@ -15,10 +13,8 @@ Window::~Window() {
 }
 
 void Window::timeIncrement() {
-    currentTime++;
     // increment time of customer
     if(currentCustomer != NULL){
-        cout << "Has a customer " << currentCustomer << " at time " << currentTime << endl;
         currentCustomer->timeIncrement();
         // check if done
         if (currentCustomer->needsNewQueue()){
@@ -26,7 +22,6 @@ void Window::timeIncrement() {
         }
     }
     else {
-        cout << "Idle for " << currentIdle << " at time " << currentTime << endl;
         // iterate idle time if no customer
         currentIdle++;
         totalIdleTime++;
@@ -38,20 +33,19 @@ void Window::timeIncrement() {
     }
 }
 
+// updates customer at window and idle time
 void Window::approachWindow(Customer* c) {
     currentCustomer = c;
     currentIdle = 0;
 }
 
+// aux empty function
 bool Window::isEmpty() {
     return (currentCustomer == NULL);
 }
 
-// bool Window::isCustomerDone() {
-//     //TODO: check if customer is done. if necessary, implement sending them back somehow
-//     return false;
-// }
 
+/* accessors */
 int Window::getLongestIdleTime() {
     return longestIdleTime;
 }

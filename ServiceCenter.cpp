@@ -29,6 +29,10 @@ ServiceCenter::ServiceCenter(string fileName){
                 if(line.size() > 1){//check if it is player data
                     string lineData = line;
 
+                    /* 
+                        - gets time values by finding the next empty char and getting all values up to that
+                        - then substrings to remove the values we already have
+                    */
                     int empty1 = lineData.find(' ');
                     int time1 = stoi(lineData.substr(0, empty1));
                     lineData = lineData.substr(empty1 + 1, lineData.size() - empty1);
@@ -41,10 +45,12 @@ ServiceCenter::ServiceCenter(string fileName){
                     int time3 = stoi(lineData.substr(0, empty3));
                     lineData = lineData.substr(empty3 + 1, lineData.size() - empty3);
 
+                    // gets offices from remaining line data
                     char office1 = lineData[0];
                     char office2 = lineData[2];
                     char office3 = lineData[4];
 
+                    // make new student and add to queue
                     Customer* stu = new Customer(time1, time2, time3, office1, office2, office3);
                     studentQueue->insert(stu);
                 }
@@ -62,6 +68,7 @@ ServiceCenter::ServiceCenter(string fileName){
     }
 
 
+    //TODO: proper comment
     registrar->makeQueuePrepArray(studentCount);
     finAid->makeQueuePrepArray(studentCount);
     cashier->makeQueuePrepArray(studentCount);
@@ -88,7 +95,7 @@ ServiceCenter::ServiceCenter(string fileName){
             stuJoinIndex = newStudentMax;
             studentmax = numOfStudentsQueue->remove();
 
-
+            //TODO: proper comment
             for(int i = stuJoinIndex; i < (stuJoinIndex + studentmax); ++i){
                 ++currentStudentNum;
                 if(stuArray[i]->getNextOffice() == 'F'){
@@ -104,12 +111,10 @@ ServiceCenter::ServiceCenter(string fileName){
             }
         }
 
+        // increment time for all offices
         ++time;
-        cout << "finaid: ";
         finAid->timeIncrement();
-        cout << "registrar: ";
         registrar->timeIncrement();
-        cout << "cashier: ";
         cashier->timeIncrement();
 
         for(int i = 0; i < currentStudentNum; ++i){ //moving students to new offices if done
@@ -126,6 +131,7 @@ ServiceCenter::ServiceCenter(string fileName){
             }
         }
 
+        // goes back and adds queues from other offices
         finAid->addQueueFromOtherOffice();
         registrar->addQueueFromOtherOffice();
         cashier->addQueueFromOtherOffice();
@@ -137,8 +143,6 @@ ServiceCenter::ServiceCenter(string fileName){
 }
 
 void ServiceCenter::printFinalData(){
-
-    cout << "FINAL TIME " << time << endl;
 
     // 1. The mean student wait time for each office.
     // 2. The longest student wait time for each office.
@@ -189,14 +193,7 @@ void ServiceCenter::printFinalData(){
 }
 
 bool ServiceCenter::studentsNotDone(){
-
-    // if(time == 10){ //TODO: DELETE THIS
-    //      for(int i = 0; i < studentCount; ++i){
-    //         cout << stuArray[i]->notDone() << endl;
-    //      }
-    //      return false;
-    // }
-
+    // checks to see if not all students are done
     for(int i = 0; i < studentCount; ++i){
         if(stuArray[i]->notDone()){
             return true;

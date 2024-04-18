@@ -79,7 +79,6 @@ void Customer::timeIncrement(){
                 zeroMove();
 
                 if(!(notDone())){
-                    cout << "THIS SHOULD HAPPEN ONCE" << endl;
                     break;
                 }
                 
