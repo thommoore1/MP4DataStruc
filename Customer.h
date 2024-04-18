@@ -19,6 +19,8 @@ class Customer{
         void timeIncrement();
         void enterQueue(int enterTime);
         int exitQueue(int exitTime);
+        bool nextOfficeIsZero();
+        void zeroMove();
 
     private:
         int testVariable; //TODO: delete later

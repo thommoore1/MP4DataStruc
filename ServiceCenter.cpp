@@ -24,7 +24,6 @@ ServiceCenter::ServiceCenter(string fileName){
             }
             else if(count == 2){
                 finAid = new Office('F', stoi(line));
-                //finAid->timeIncrement(); //TODO: DELETE
             }
             else{
                 if(line.size() > 1){//check if it is player data
@@ -33,25 +32,18 @@ ServiceCenter::ServiceCenter(string fileName){
                     int empty1 = lineData.find(' ');
                     int time1 = stoi(lineData.substr(0, empty1));
                     lineData = lineData.substr(empty1 + 1, lineData.size() - empty1);
-                    cout << time1 << " | " << lineData << endl; 
 
                     int empty2 = lineData.find(' ');
                     int time2 = stoi(lineData.substr(0, empty2));
                     lineData = lineData.substr(empty2 + 1, lineData.size() - empty2);
-                    cout << time2 << " | " << lineData << endl; 
 
                     int empty3 = lineData.find(' ');
                     int time3 = stoi(lineData.substr(0, empty3));
                     lineData = lineData.substr(empty3 + 1, lineData.size() - empty3);
-                    cout << time3 << " | " << lineData << endl; 
 
                     char office1 = lineData[0];
                     char office2 = lineData[2];
                     char office3 = lineData[4];
-
-                    cout << office1;
-                    cout << office2;
-                    cout << office3 << endl;;
 
                     Customer* stu = new Customer(time1, time2, time3, office1, office2, office3);
                     studentQueue->insert(stu);
@@ -69,9 +61,6 @@ ServiceCenter::ServiceCenter(string fileName){
         }
     }
 
-        
-    //finAid->timeIncrement(); //TODO: DELETE
-    cout << "AHH" << endl;
 
     registrar->makeQueuePrepArray(studentCount);
     finAid->makeQueuePrepArray(studentCount);
@@ -79,18 +68,12 @@ ServiceCenter::ServiceCenter(string fileName){
 
     stuArray = new Customer*[studentCount]; //adding student queue to student array
     int index = -1;
+
     while(!(studentQueue->isEmpty())){
-        cout << "HELLO" << endl;
         stuArray[++index] = studentQueue->remove();
     }
 
-            
-    //finAid->timeIncrement(); //TODO: DELETE
     delete studentQueue;
-    cout << "Delete" << endl;
-    //finAid->timeIncrement(); //TODO: DELETE
-
-    cout << "DYLAN DEV: " << endl;
     
     time = 1;
     int stuJoinIndex = 0;
@@ -98,86 +81,51 @@ ServiceCenter::ServiceCenter(string fileName){
     int newStudentMax = 0;
     int currentStudentNum = 0;
 
-    cout << "oops" << endl;
-    //finAid->timeIncrement(); //TODO: DELETE
 
     while(studentsNotDone()){
-        cout << "I love this" << endl;
-        if(!joinTimeQueue->isEmpty()){
-        cout << "TIME: " << time << " and join time: " << joinTimeQueue->peek() << endl;
-        }
         if(!(joinTimeQueue->isEmpty()) && time == joinTimeQueue->peek()){//time is equal to next student join time
-            cout << "AFDHFSDHDFSH" << endl;
             joinTimeQueue->remove();
             stuJoinIndex = newStudentMax;
             studentmax = numOfStudentsQueue->remove();
 
 
-            cout << "join index: " << stuJoinIndex << endl;
-            cout << "student max: " << studentmax << endl;
-
-
             for(int i = stuJoinIndex; i < (stuJoinIndex + studentmax); ++i){
                 ++currentStudentNum;
-                cout << "for loopy loop" << endl;
-                cout << i << endl;
-                cout << stuArray[i]->notDone() << endl;
                 if(stuArray[i]->getNextOffice() == 'F'){
-                    cout << "taters" << endl;
                     finAid->addStudentToQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
-                    cout << "steak" << endl;
                     registrar->addStudentToQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'C'){
-                    cout << "lobster" << endl;
                     cashier->addStudentToQueue(stuArray[i]);
                 }
-                cout << "DANIEL" << endl;
                 newStudentMax = i + 1;
             }
         }
-
-        cout << "MOORE" << endl;
 
         ++time;
         finAid->timeIncrement();
         registrar->timeIncrement();
         cashier->timeIncrement();
 
-        cout << "THOMAS" << endl;
-
-        cout << "current Student count: " << currentStudentNum << endl;
-
         for(int i = 0; i < currentStudentNum; ++i){ //moving students to new offices if done
-            cout << "new queue for index " << i << endl;
             if(stuArray[i]->needsNewQueue()){
-                cout << "needs new queue" << endl;
                 if(stuArray[i]->getNextOffice() == 'F'){
-                    cout << "prep123 fin aid" << endl;
                     finAid->prepStudentForQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
-                    cout << "prep123 registrar" << endl;
                     registrar->prepStudentForQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'C'){
-                    cout << "prep123 cashier" << endl;
                     cashier->prepStudentForQueue(stuArray[i]);
                 }
             }
         }
 
-        cout << "We all vote" << endl;
-        cout << "TIME: " << time << endl;
-
         finAid->addQueueFromOtherOffice();
         registrar->addQueueFromOtherOffice();
         cashier->addQueueFromOtherOffice();
-
-        cout << "mario" << endl;
-
     }
 
     printFinalData();
@@ -186,6 +134,8 @@ ServiceCenter::ServiceCenter(string fileName){
 }
 
 void ServiceCenter::printFinalData(){
+
+    cout << "FINAL TIME " << time << endl;
 
     // 1. The mean student wait time for each office.
     // 2. The longest student wait time for each office.
@@ -244,7 +194,6 @@ bool ServiceCenter::studentsNotDone(){
     //      return false;
     // }
 
-    cout << endl << endl << endl;
     for(int i = 0; i < studentCount; ++i){
         if(stuArray[i]->notDone()){
             return true;
