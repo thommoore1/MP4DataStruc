@@ -1,6 +1,11 @@
 #include "ServiceCenter.h"
 
 int main(int argc, char** argv){
-    ServiceCenter* sc = new ServiceCenter("input.txt");
-    delete sc;
+    if(argc >= 2){
+        ServiceCenter* sc = new ServiceCenter("input.txt");
+        delete sc;
+    }
+    else{
+        cerr << "You need to put in your file name" << endl;
+    }
 }
