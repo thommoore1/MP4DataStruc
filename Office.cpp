@@ -88,7 +88,7 @@ int Office::getVisitsOver10() {
     return visitsOver10;
 }
 
-double Office::getMeanIdleTime() {
+double Office::getMeanIdleTime() { // gets the mean idle time from all windows' total idle times
     int totalIdleTime = 0;
     for (int i = 0; i < numWindows; ++i) {
         // add idle time of window to total
@@ -97,17 +97,17 @@ double Office::getMeanIdleTime() {
     return ((double) totalIdleTime / (double) numWindows);
 }
 
-int Office::getLongestIdleTime() {
+int Office::getLongestIdleTime() { // gets the longest idle time amongst all windows
     int maxIdleTime = 0;
     for (int i = 0; i < numWindows; ++i) {
         // if the max idle time is greater, replace the old one
-        int currIdleTime = windows[i]->getLongestIdleTime();
+        int currIdleTime = windows[i]->getTotalIdleTime();
         if (currIdleTime > maxIdleTime) maxIdleTime = currIdleTime;
     }
     return maxIdleTime;
 }
 
-int Office::getTotalIdleOver5() {
+int Office::getTotalIdleOver5() { // returns the total number of windows with idles over 5
     int counter = 0;
     for (int i = 0; i < numWindows; ++i) {
         // add idle time of window to total
@@ -148,7 +148,6 @@ void Office::addToWaitTime() {
 }
 
 void Office::prepStudentForQueue(Customer *c){
-    
     queuePrep[queuePrepIndex] = c;
     ++queuePrepIndex;
 }
