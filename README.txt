@@ -1,5 +1,6 @@
 Names: Daniel Tsivkovski and Tom Moore
-Emails: tsivkovski@chapman.edu, tmoore@chapman.edu
+Emails: tsivkovski@chapman.edu, thomoore@chapman.edu
+ID: Daniel: and Tom: 2444464
 Course: CPSC350-03, CPSC350-04
 Assignment 4
 -----
