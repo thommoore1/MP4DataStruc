@@ -147,40 +147,22 @@ void Office::addToWaitTime() {
     totalWaitTime += queue->getSize();
 }
 
-void Office::prepStudentForQueue(Customer *c){
+void Office::prepStudentForQueue(Customer *c){ //adds student to the array and increases index. This method is only called for students who are moving from another office to this current office
     queuePrep[queuePrepIndex] = c;
     ++queuePrepIndex;
 }
 
-void Office::makeQueuePrepArray(int sn){
+void Office::makeQueuePrepArray(int sn){ //makes an array based on number of students
     queuePrep = new Customer*[sn];
     queuePrepIndex = 0;
 }
  
-void Office::addQueueFromOtherOffice(){
+void Office::addQueueFromOtherOffice(){ //This method is for when a student finishes and needs to be added to another queue when coming from another.
     for(int i = 0; i < queuePrepIndex; ++i){
         if(queuePrep[i] == NULL){
             break;
         }
-        if(queuePrep[i]->getNextOffice() == 'C'){
-            addStudentToQueue(queuePrep[i]);
-        }
-    }
-    for(int i = 0; i < queuePrepIndex; ++i){
-        if(queuePrep[i] == NULL){
-            break;
-        }
-        if(queuePrep[i]->getNextOffice() == 'F'){
-            addStudentToQueue(queuePrep[i]);
-        }
-    }
-    for(int i = 0; i < queuePrepIndex; ++i){
-        if(queuePrep[i] == NULL){
-            break;
-        }
-        if(queuePrep[i]->getNextOffice() == 'R'){
-            addStudentToQueue(queuePrep[i]);
-        }
+        addStudentToQueue(queuePrep[i]);
     }
 
     for(int i = 0; i < queuePrepIndex; ++i){
