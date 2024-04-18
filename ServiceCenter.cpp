@@ -5,6 +5,8 @@ ServiceCenter::ServiceCenter(string fileName){
     int count = -1;
     int count2 = -1;
     ifstream readFile(fileName);
+    if(readFile.good()){
+
     timeOrStudentNum = 't';
 
     numOfStudentsQueue = new Queue<int>();
@@ -95,10 +97,9 @@ ServiceCenter::ServiceCenter(string fileName){
             stuJoinIndex = newStudentMax;
             studentmax = numOfStudentsQueue->remove();
 
-            //TODO: proper comment
-            for(int i = stuJoinIndex; i < (stuJoinIndex + studentmax); ++i){
+            for(int i = stuJoinIndex; i < (stuJoinIndex + studentmax); ++i){ //loops through student array, starting at the index 1 more than the last index, and continuing for the number of students to be added (so if it is time 2, and at time 2, 3 students enter, and 4 students have already entered, i, will start at 3, and iterate to 6)
                 ++currentStudentNum;
-                if(stuArray[i]->getNextOffice() == 'F'){
+                if(stuArray[i]->getNextOffice() == 'F'){ //checks where student starts, then adds them to that office
                     finAid->addStudentToQueue(stuArray[i]);
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
@@ -118,9 +119,9 @@ ServiceCenter::ServiceCenter(string fileName){
         cashier->timeIncrement();
 
         for(int i = 0; i < currentStudentNum; ++i){ //moving students to new offices if done
-            if(stuArray[i]->needsNewQueue()){
+            if(stuArray[i]->needsNewQueue()){ //if after time increment, student needs a new queue, adds student to that queue
                 if(stuArray[i]->getNextOffice() == 'F'){
-                    finAid->prepStudentForQueue(stuArray[i]);
+                    finAid->prepStudentForQueue(stuArray[i]); //special method for when student is moving from one office to another
                 }
                 else if(stuArray[i]->getNextOffice() == 'R'){
                     registrar->prepStudentForQueue(stuArray[i]);
@@ -131,7 +132,7 @@ ServiceCenter::ServiceCenter(string fileName){
             }
         }
 
-        // goes back and adds queues from other offices
+        // goes back and adds students from other offices to the queue they want to move to
         finAid->addQueueFromOtherOffice();
         registrar->addQueueFromOtherOffice();
         cashier->addQueueFromOtherOffice();
@@ -139,6 +140,10 @@ ServiceCenter::ServiceCenter(string fileName){
 
     printFinalData();
 
+    }
+    else{
+        cerr << "Please put in a correctly formatted file name. File may be broken" << endl;
+    }
     //print stuff
 }
 
